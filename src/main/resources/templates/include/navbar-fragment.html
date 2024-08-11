@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="navbar">
+    <script th:inline="javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            const navItems = document.querySelectorAll('.nav-item');
+
+            navItems.forEach(function (item) {
+                item.addEventListener('click', function () {
+                    const page = item.getAttribute('data-page');
+
+                    switch (page) {
+                        case 'search':
+                            window.location.href = '/search';
+                            break;
+                        case 'ranking':
+                            window.location.href = '/ranking';
+                            break;
+                        case 'home':
+                            window.location.href = '/';
+                            break;
+                        case 'favorites':
+                            window.location.href = '/favorites';
+                            break;
+                        case 'user':
+                            if (true) {
+                                window.location.href = '/user';
+                            } else {
+                                window.location.href = '/auth/login';
+                            }
+                            break;
+                        default:
+                            console.error('Unknown page:', page);
+                            window.location.href = '/error';
+                    }
+                });
+            });
+        });
+    </script>
+    <div class="navbar">
+        <div class="nav-item" data-page="search">
+            <img src="/images/icons/search.svg" alt="Search Icon" class="nav-icon">
+            <span class="nav-text">검색</span>
+        </div>
+        <div class="nav-item" data-page="ranking">
+            <img src="/images/icons/bar-chart.svg" alt="Bar Chart Icon" class="nav-icon">
+            <span class="nav-text">랭킹</span>
+        </div>
+        <div class="nav-item" data-page="home">
+            <img src="/images/icons/home.svg" alt="Home Icon" class="nav-icon">
+            <span class="nav-text">홈</span>
+        </div>
+        <div class="nav-item" data-page="favorites">
+            <img src="/images/icons/favorites.svg" alt="Favorites Icon" class="nav-icon">
+            <span class="nav-text">즐겨찾기</span>
+        </div>
+        <div class="nav-item" data-page="user">
+            <img src="/images/icons/user.svg" alt="User Icon" class="nav-icon">
+            <span class="nav-text">마이</span>
+        </div>
+    </div>
+
+</th:block>
+</html>

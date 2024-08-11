@@ -1,0 +1,353 @@
+/* styles.css */
+
+/*---- 기본스타일 ----------------------------------------*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height:100%;
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    color: #333;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+}
+
+ol, ul {
+    list-style: none;
+}
+a{
+    text-decoration: none;
+}
+blockquote, q {
+    quotes: none;
+}
+
+input:focus{outline: none;}
+/*-----------------------------------------------------*/
+
+/*---- 레이아웃 조각 -------------------------------------*/
+/* 헤더 스타일 */
+.header {
+    background-color: #fff;
+    color: #333;
+    width: 100%;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* 네비게이션 바 스타일 */
+.navbar {
+    width: 100%;
+    height: 56px;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #333;
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+.nav-icon {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 5px;
+}
+
+.nav-text {
+    margin-top: 3px;
+}
+
+/* 푸터 스타일 */
+.footer {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #888;
+    background-color: #333;
+    color: #fff;
+}
+
+/*-----------------------------------------------------*/
+
+/*---- 컨텐츠들 -------------------------------------*/
+/* 메인 콘텐츠 스타일(공통) */
+.main-flex {
+    width: 100%;
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: auto; /* 내부 콘텐츠가 넘칠 경우 스크롤 생성 */
+    max-height: calc(100vh - 140px); /* 뷰포트 높이에 따라 조정, 헤더(48)와 네브바(56), 푸터(36) 높이 고려 */
+}
+
+.main-block {
+    width: 100%;
+    padding: 20px;
+    flex-grow: 1;
+    display: block;
+    overflow: auto; /* 내부 콘텐츠가 넘칠 경우 스크롤 생성 */
+    max-height: calc(100vh - 140px); /* 뷰포트 높이에 따라 조정, 헤더(48)와 네브바(56), 푸터(36) 높이 고려 */
+}
+
+
+
+.main-content {
+    padding: 20px;
+    background-color: #fff;
+}
+
+.cta-button:hover {
+    background-color: #45a049;
+}
+
+/* 검색 페이지 스타일 */
+.search-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.search-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.search-option {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    height: 30px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    background: white;
+    padding: 0 10px;
+    font-size: 14px;
+    color: #797979;
+}
+
+.search-box {
+    display: flex; /* 추가: .search-box 내부의 요소들을 가로로 정렬 */
+    align-items: center; /* 추가: .search-box 내부의 요소들을 수직으로 가운데 정렬 */
+    height: 40px;
+    width: 350px;
+    background: white;
+    border-radius: 40px;
+    padding: 10px;
+    border: 1px solid #333;
+}
+
+.search-txt {
+    border: none;
+    background: none;
+    outline: none;
+    padding: 0px;
+    color: #797979;
+    font-size: 16px;
+    line-height: 20px;
+    flex: 1; /* 입력 필드가 남은 공간을 차지하도록 설정 */
+}
+
+.search-button {
+    color: #f9deec;
+    float: right;
+    width: 25px;
+    height: 100%;
+    border-radius: 50%;
+    background: white;
+    border: none;
+    font-size: 16pt;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.search-button img{
+    width: 20px;
+    height: 20px;
+}
+
+.map-container {
+    margin-top: 20px;
+}
+
+#map {
+    width: 100%;
+    height: 400px; /* 지도 영역의 높이 조정 */
+    background-color: #e0e0e0;
+    border-radius: 4px;
+}
+
+/* 로그인 페이지 스타일 & 회원가입 페이지 스타일 */
+.login-container {
+    max-width: 400px;
+    min-width: 350px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.login-container h2 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.login-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #45a049;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.login-button:hover {
+    background-color: #0056b3;
+}
+
+.extra-links {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.extra-links a {
+    display: inline-block;
+    margin: 5px;
+    color: #007bff;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.extra-links a:hover {
+    text-decoration: underline;
+}
+
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+/* 즐겨찾기 페이지 스타일 */
+.favorite-item {
+    position: relative;
+    padding: 20px;
+    margin: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.heart-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.heart-icon img {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.item-details {
+    padding-right: 40px; /* 하트 아이콘에 영향을 받지 않도록 여유 공간 추가 */
+}
+
+.item-title {
+    margin: 0;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.item-location,
+.item-phone,
+.item-address {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+/* 에러 페이지 스타일 */
+.sub05-txt{
+    text-align: center;
+}
+.sub05-txt img{
+    margin: 0 auto;
+}
+.sub05-txt h3{
+    font-size:1.375rem;
+    margin: 16px 0;
+    font-weight: 500;
+}
+.sub05-txt p{
+    font-size:0.813rem;
+    color: #ababab;
+    white-space: pre-line;
+    line-height: 1.38em;
+}
+
+/* 모바일 화면 고정 크기 */
+@media (max-width: 600px) {
+    .wrapper {
+        width: 100%;
+        max-width: 600px;
+        min-height: 100vh;
+    }
+}

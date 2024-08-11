@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="include/head-meta-fragment :: head-mata"></th:block>
+<body>
+<script th:inline="javascript">
+
+</script>
+    <th:block th:replace="include/header-fragment :: header"></th:block>
+    <main class="main-flex">
+        <div class="search-container">
+            <form action="#" method="get">
+                <div>
+                    <select class="search-option" name="category">
+                        <option value="all">미디어</option>
+                        <option value="drama">드라마</option>
+                        <option value="show">예능</option>
+                    </select>
+                    <select class="search-option" name="sort">
+                        <option value="all">장소</option>
+                        <option value="cate">카페</option>
+                        <option value="restaurant">식당</option>
+                    </select>
+                </div>
+                <div class="search-box">
+                    <input class="search-txt" type="text" name="" placeholder="검색어를 입력하세요.">
+                    <button class="search-button" type="submit">
+                        <img src="/images/icons/search.svg">
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="map-container">
+            <!-- 지도 삽입 공간 -->
+            <div id="map">지도 영역</div>
+        </div>
+    </main>
+    <th:block th:replace="include/navbar-fragment :: navbar"></th:block>
+    <th:block th:replace="include/footer-fragment :: footer"></th:block>
+</body>
+</html>
