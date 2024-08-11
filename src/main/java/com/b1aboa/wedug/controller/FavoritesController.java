@@ -5,12 +5,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/")
-public class HomeController {
+@RequestMapping("/favorites")
+public class FavoritesController {
 
     @GetMapping
-    public String showIndexPage() {
-        return "index";
+    public String showFavoritesPage() {
+        return "favorites/favorites";
     }
 
 }

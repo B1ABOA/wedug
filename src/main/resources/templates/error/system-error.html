@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="include/head-meta-fragment :: head-mata"></th:block>
+<body>
+    <th:block th:replace="include/header-fragment :: header"></th:block>
+    <div class="main-flex">
+        <div class="sub05-container">
+            <div class="sub05-txt">
+                <img src="/images/icons/error.svg" alt="Error Icon">
+                <h3>시스템 오류가 발생하였습니다</h3>
+                <p>현재 시스템에 문제가 발생하여 요청을 처리할 수 없습니다</p>
+                <p>잠시 후 다시 시도해 주시거나, 문제가 계속될 경우 관리자에게 문의해 주시기 바랍니다</p>
+                <a href="/">홈으로 돌아가기</a>
+            </div>
+        </div>
+    </div>
+    <div style="height: 56px;"></div>
+    <th:block th:replace="include/footer-fragment :: footer"></th:block>
+</body>
+</html>
