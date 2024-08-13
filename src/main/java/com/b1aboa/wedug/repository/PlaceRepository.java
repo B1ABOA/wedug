@@ -9,5 +9,6 @@ import java.util.List;
 
 @Repository
 public interface PlaceRepository extends JpaRepository<Place, Long> {
+    // MediaInfo 객체로 Place 엔티티 목록을 찾는 메서드
     List<Place> findByMediaCode(MediaInfo mediaCode);
 }

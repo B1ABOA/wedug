@@ -8,5 +8,7 @@ import java.util.Optional;
 
 @Repository
 public interface MediaInfoRepository extends JpaRepository<MediaInfo, Long> {
-    Optional<MediaInfo> findByMediaCode(long mediaCode);
+
+    // mediaType으로 MediaInfo를 찾는 메서드
+    Optional<MediaInfo> findByMediaType(String mediaType);
 }

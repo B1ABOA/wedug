@@ -1,5 +1,6 @@
 package com.b1aboa.wedug.controller;
 
+import com.b1aboa.wedug.dto.PlaceDTO;
 import com.b1aboa.wedug.entity.Place;
 import com.b1aboa.wedug.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class SearchController {
 //     /api/places/search?media-type={mediaType}
     @GetMapping("/api/places/search")
     public String searchPlaceMedia(@RequestParam("media-type") String mediaType, Model model) {
-        List<Place> searchList = searchService.searchPlacesByMediaType(mediaType);
+        List<PlaceDTO> searchList = searchService.searchPlacesByMediaType(mediaType);
         model.addAttribute("searchList", searchList);
         return "search/map-search";
     }
