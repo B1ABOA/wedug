@@ -1,0 +1,1152 @@
+[
+  {
+    "NATION_CODE": 258,
+    "EN_NAME": "French Polynesia",
+    "KO_NAME": "프랑스령 폴리네시아"
+  },
+  {
+    "NATION_CODE": 242,
+    "EN_NAME": "Fiji",
+    "KO_NAME": "피지"
+  },
+  {
+    "NATION_CODE": 246,
+    "EN_NAME": "Finland",
+    "KO_NAME": "핀란드"
+  },
+  {
+    "NATION_CODE": 608,
+    "EN_NAME": "Philippines",
+    "KO_NAME": "필리핀"
+  },
+  {
+    "NATION_CODE": 612,
+    "EN_NAME": "Pitcairn Islands",
+    "KO_NAME": "핏케언 섬"
+  },
+  {
+    "NATION_CODE": 348,
+    "EN_NAME": "Hungary",
+    "KO_NAME": "헝가리"
+  },
+  {
+    "NATION_CODE": 36,
+    "EN_NAME": "Australia",
+    "KO_NAME": "호주"
+  },
+  {
+    "NATION_CODE": 344,
+    "EN_NAME": "Hongkong",
+    "KO_NAME": "홍콩"
+  },
+  {
+    "NATION_CODE": 288,
+    "EN_NAME": "Ghana",
+    "KO_NAME": "가나"
+  },
+  {
+    "NATION_CODE": 266,
+    "EN_NAME": "Gabon",
+    "KO_NAME": "가봉"
+  },
+  {
+    "NATION_CODE": 328,
+    "EN_NAME": "Guyana",
+    "KO_NAME": "가이아나"
+  },
+  {
+    "NATION_CODE": 270,
+    "EN_NAME": "Gambia",
+    "KO_NAME": "감비아"
+  },
+  {
+    "NATION_CODE": 831,
+    "EN_NAME": "Bailiwick of Guernsey",
+    "KO_NAME": "건지"
+  },
+  {
+    "NATION_CODE": 312,
+    "EN_NAME": "Guadeloupe",
+    "KO_NAME": "과들루프"
+  },
+  {
+    "NATION_CODE": 320,
+    "EN_NAME": "Guatemala",
+    "KO_NAME": "과테말라"
+  },
+  {
+    "NATION_CODE": 316,
+    "EN_NAME": "Guam",
+    "KO_NAME": "괌"
+  },
+  {
+    "NATION_CODE": 336,
+    "EN_NAME": "Vatican",
+    "KO_NAME": "교황청"
+  },
+  {
+    "NATION_CODE": 308,
+    "EN_NAME": "Grenada",
+    "KO_NAME": "그레나다"
+  },
+  {
+    "NATION_CODE": 300,
+    "EN_NAME": "Greece",
+    "KO_NAME": "그리스"
+  },
+  {
+    "NATION_CODE": 304,
+    "EN_NAME": "Greenland",
+    "KO_NAME": "그린란드"
+  },
+  {
+    "NATION_CODE": 324,
+    "EN_NAME": "Guinea",
+    "KO_NAME": "기니"
+  },
+  {
+    "NATION_CODE": 624,
+    "EN_NAME": "Guinea-Bissau",
+    "KO_NAME": "기니비사우"
+  },
+  {
+    "NATION_CODE": 516,
+    "EN_NAME": "Namibia",
+    "KO_NAME": "나미비아"
+  },
+  {
+    "NATION_CODE": 520,
+    "EN_NAME": "Nauru",
+    "KO_NAME": "나우루"
+  },
+  {
+    "NATION_CODE": 566,
+    "EN_NAME": "Nigeria",
+    "KO_NAME": "나이지리아"
+  },
+  {
+    "NATION_CODE": 728,
+    "EN_NAME": "South Sudan",
+    "KO_NAME": "남수단"
+  },
+  {
+    "NATION_CODE": 710,
+    "EN_NAME": "South Africa",
+    "KO_NAME": "남아프리카공화국"
+  },
+  {
+    "NATION_CODE": 528,
+    "EN_NAME": "Netherlands",
+    "KO_NAME": "네덜란드"
+  },
+  {
+    "NATION_CODE": 530,
+    "EN_NAME": "Netherlands Antilles",
+    "KO_NAME": "네덜란드령 안틸레스"
+  },
+  {
+    "NATION_CODE": 524,
+    "EN_NAME": "Nepal",
+    "KO_NAME": "네팔연방"
+  },
+  {
+    "NATION_CODE": 578,
+    "EN_NAME": "Norway",
+    "KO_NAME": "노르웨이"
+  },
+  {
+    "NATION_CODE": 540,
+    "EN_NAME": "New Caledonia",
+    "KO_NAME": "뉴 칼레도니아"
+  },
+  {
+    "NATION_CODE": 554,
+    "EN_NAME": "New Zealand",
+    "KO_NAME": "뉴질랜드"
+  },
+  {
+    "NATION_CODE": 570,
+    "EN_NAME": "Niue",
+    "KO_NAME": "니우에"
+  },
+  {
+    "NATION_CODE": 562,
+    "EN_NAME": "Niger",
+    "KO_NAME": "니제르"
+  },
+  {
+    "NATION_CODE": 558,
+    "EN_NAME": "Nicaragua",
+    "KO_NAME": "니카라과"
+  },
+  {
+    "NATION_CODE": 158,
+    "EN_NAME": "Taiwan",
+    "KO_NAME": "대만"
+  },
+  {
+    "NATION_CODE": 410,
+    "EN_NAME": "Korea",
+    "KO_NAME": "대한민국"
+  },
+  {
+    "NATION_CODE": 208,
+    "EN_NAME": "Denmark",
+    "KO_NAME": "덴마크"
+  },
+  {
+    "NATION_CODE": 214,
+    "EN_NAME": "Dominican Republic",
+    "KO_NAME": "도미니카공화국"
+  },
+  {
+    "NATION_CODE": 212,
+    "EN_NAME": "Dominica",
+    "KO_NAME": "도미니카연방"
+  },
+  {
+    "NATION_CODE": 276,
+    "EN_NAME": "Germany",
+    "KO_NAME": "독일"
+  },
+  {
+    "NATION_CODE": 626,
+    "EN_NAME": "Timor-Leste",
+    "KO_NAME": "동티모르"
+  },
+  {
+    "NATION_CODE": 418,
+    "EN_NAME": "Laos",
+    "KO_NAME": "라오스"
+  },
+  {
+    "NATION_CODE": 430,
+    "EN_NAME": "Liberia",
+    "KO_NAME": "라이베리아"
+  },
+  {
+    "NATION_CODE": 428,
+    "EN_NAME": "Latvia",
+    "KO_NAME": "라트비아"
+  },
+  {
+    "NATION_CODE": 643,
+    "EN_NAME": "Russia",
+    "KO_NAME": "러시아"
+  },
+  {
+    "NATION_CODE": 422,
+    "EN_NAME": "Lebanon",
+    "KO_NAME": "레바논"
+  },
+  {
+    "NATION_CODE": 426,
+    "EN_NAME": "Lesotho",
+    "KO_NAME": "레소토"
+  },
+  {
+    "NATION_CODE": 638,
+    "EN_NAME": "R?union",
+    "KO_NAME": "레위니옹"
+  },
+  {
+    "NATION_CODE": 642,
+    "EN_NAME": "Romania",
+    "KO_NAME": "루마니아"
+  },
+  {
+    "NATION_CODE": 442,
+    "EN_NAME": "Luxembourg",
+    "KO_NAME": "룩셈부르크"
+  },
+  {
+    "NATION_CODE": 646,
+    "EN_NAME": "Rwanda",
+    "KO_NAME": "르완다"
+  },
+  {
+    "NATION_CODE": 434,
+    "EN_NAME": "Libya",
+    "KO_NAME": "리비아"
+  },
+  {
+    "NATION_CODE": 440,
+    "EN_NAME": "Lithuania",
+    "KO_NAME": "리투아니아"
+  },
+  {
+    "NATION_CODE": 438,
+    "EN_NAME": "Liechtenstein",
+    "KO_NAME": "리히텐슈타인"
+  },
+  {
+    "NATION_CODE": 450,
+    "EN_NAME": "Madagascar",
+    "KO_NAME": "마다가스카르"
+  },
+  {
+    "NATION_CODE": 474,
+    "EN_NAME": "Martinique",
+    "KO_NAME": "마르티니크"
+  },
+  {
+    "NATION_CODE": 584,
+    "EN_NAME": "Marshall Islands",
+    "KO_NAME": "마셜제도"
+  },
+  {
+    "NATION_CODE": 175,
+    "EN_NAME": "Mayotte",
+    "KO_NAME": "마요트"
+  },
+  {
+    "NATION_CODE": 583,
+    "EN_NAME": "Federated States of Micronesia",
+    "KO_NAME": "마이크로네시아연방"
+  },
+  {
+    "NATION_CODE": 446,
+    "EN_NAME": "Macao",
+    "KO_NAME": "마카오"
+  },
+  {
+    "NATION_CODE": 454,
+    "EN_NAME": "Malawi",
+    "KO_NAME": "말라위"
+  },
+  {
+    "NATION_CODE": 458,
+    "EN_NAME": "Malaysia",
+    "KO_NAME": "말레이시아"
+  },
+  {
+    "NATION_CODE": 466,
+    "EN_NAME": "Mali",
+    "KO_NAME": "말리"
+  },
+  {
+    "NATION_CODE": 833,
+    "EN_NAME": "Isle of Man",
+    "KO_NAME": "맨 섬"
+  },
+  {
+    "NATION_CODE": 484,
+    "EN_NAME": "Mexico",
+    "KO_NAME": "멕시코"
+  },
+  {
+    "NATION_CODE": 492,
+    "EN_NAME": "Monaco",
+    "KO_NAME": "모나코"
+  },
+  {
+    "NATION_CODE": 504,
+    "EN_NAME": "Morocco",
+    "KO_NAME": "모로코"
+  },
+  {
+    "NATION_CODE": 480,
+    "EN_NAME": "Mauritius",
+    "KO_NAME": "모리셔스"
+  },
+  {
+    "NATION_CODE": 478,
+    "EN_NAME": "Mauritania",
+    "KO_NAME": "모리타니아"
+  },
+  {
+    "NATION_CODE": 508,
+    "EN_NAME": "Mazambique",
+    "KO_NAME": "모잠비크"
+  },
+  {
+    "NATION_CODE": 499,
+    "EN_NAME": "Montenegro",
+    "KO_NAME": "몬테네그로"
+  },
+  {
+    "NATION_CODE": 500,
+    "EN_NAME": "Montserrat",
+    "KO_NAME": "몬트세랫"
+  },
+  {
+    "NATION_CODE": 498,
+    "EN_NAME": "Moldova",
+    "KO_NAME": "몰도바"
+  },
+  {
+    "NATION_CODE": 462,
+    "EN_NAME": "Maldives",
+    "KO_NAME": "몰디브"
+  },
+  {
+    "NATION_CODE": 470,
+    "EN_NAME": "Malta",
+    "KO_NAME": "몰타"
+  },
+  {
+    "NATION_CODE": 496,
+    "EN_NAME": "Mongolia",
+    "KO_NAME": "몽골"
+  },
+  {
+    "NATION_CODE": 104,
+    "EN_NAME": "Myanmar",
+    "KO_NAME": "미얀마"
+  },
+  {
+    "NATION_CODE": 840,
+    "EN_NAME": "United States of America",
+    "KO_NAME": "미합중국"
+  },
+  {
+    "NATION_CODE": 548,
+    "EN_NAME": "Vanuatu",
+    "KO_NAME": "바누아투"
+  },
+  {
+    "NATION_CODE": 48,
+    "EN_NAME": "Bahrain",
+    "KO_NAME": "바레인"
+  },
+  {
+    "NATION_CODE": 52,
+    "EN_NAME": "Barbados",
+    "KO_NAME": "바베이도스"
+  },
+  {
+    "NATION_CODE": 44,
+    "EN_NAME": "Bahamas",
+    "KO_NAME": "바하마"
+  },
+  {
+    "NATION_CODE": 50,
+    "EN_NAME": "Bangladesh",
+    "KO_NAME": "방글라데시"
+  },
+  {
+    "NATION_CODE": 60,
+    "EN_NAME": "Bermuda",
+    "KO_NAME": "버뮤다"
+  },
+  {
+    "NATION_CODE": 204,
+    "EN_NAME": "Benin",
+    "KO_NAME": "베냉"
+  },
+  {
+    "NATION_CODE": 862,
+    "EN_NAME": "Venezuela",
+    "KO_NAME": "베네수엘라볼리바르"
+  },
+  {
+    "NATION_CODE": 704,
+    "EN_NAME": "Vietnam",
+    "KO_NAME": "베트남"
+  },
+  {
+    "NATION_CODE": 56,
+    "EN_NAME": "Belgium",
+    "KO_NAME": "벨기에"
+  },
+  {
+    "NATION_CODE": 112,
+    "EN_NAME": "Belarus",
+    "KO_NAME": "벨라루스"
+  },
+  {
+    "NATION_CODE": 84,
+    "EN_NAME": "Belize",
+    "KO_NAME": "벨리즈"
+  },
+  {
+    "NATION_CODE": 70,
+    "EN_NAME": "Bosnia-Herzegovina",
+    "KO_NAME": "보스니아헤르체고비나"
+  },
+  {
+    "NATION_CODE": 72,
+    "EN_NAME": "Botswana",
+    "KO_NAME": "보츠와나"
+  },
+  {
+    "NATION_CODE": 68,
+    "EN_NAME": "Bolivia",
+    "KO_NAME": "볼리비아"
+  },
+  {
+    "NATION_CODE": 108,
+    "EN_NAME": "Burundi",
+    "KO_NAME": "부룬디"
+  },
+  {
+    "NATION_CODE": 854,
+    "EN_NAME": "Burkina Faso",
+    "KO_NAME": "부르키나파소"
+  },
+  {
+    "NATION_CODE": 64,
+    "EN_NAME": "Bhutan",
+    "KO_NAME": "부탄"
+  },
+  {
+    "NATION_CODE": 580,
+    "EN_NAME": "Northern Mariana Islands",
+    "KO_NAME": "북마리아나 군도"
+  },
+  {
+    "NATION_CODE": 807,
+    "EN_NAME": "North Macedonia",
+    "KO_NAME": "북마케도니아"
+  },
+  {
+    "NATION_CODE": 100,
+    "EN_NAME": "Bulgaria",
+    "KO_NAME": "불가리아"
+  },
+  {
+    "NATION_CODE": 76,
+    "EN_NAME": "Brazil",
+    "KO_NAME": "브라질"
+  },
+  {
+    "NATION_CODE": 96,
+    "EN_NAME": "Brunei",
+    "KO_NAME": "브루나이"
+  },
+  {
+    "NATION_CODE": 882,
+    "EN_NAME": "Samoa",
+    "KO_NAME": "사모아"
+  },
+  {
+    "NATION_CODE": 682,
+    "EN_NAME": "Saudi Arabia",
+    "KO_NAME": "사우디아라비아"
+  },
+  {
+    "NATION_CODE": 196,
+    "EN_NAME": "Cyprus",
+    "KO_NAME": "사이프러스"
+  },
+  {
+    "NATION_CODE": 732,
+    "EN_NAME": "Sahara Arab Democratic Republic",
+    "KO_NAME": "사하라 아랍민주공화국(서부사하라)"
+  },
+  {
+    "NATION_CODE": 674,
+    "EN_NAME": "San Marino",
+    "KO_NAME": "산마리노"
+  },
+  {
+    "NATION_CODE": 678,
+    "EN_NAME": "Sao Tome and Principe",
+    "KO_NAME": "상투메프린시페"
+  },
+  {
+    "NATION_CODE": 666,
+    "EN_NAME": "St. Pierre and Miquelon",
+    "KO_NAME": "생피에르·미클롱"
+  },
+  {
+    "NATION_CODE": 686,
+    "EN_NAME": "Senegal",
+    "KO_NAME": "세네갈"
+  },
+  {
+    "NATION_CODE": 688,
+    "EN_NAME": "Serbia",
+    "KO_NAME": "세르비아"
+  },
+  {
+    "NATION_CODE": 690,
+    "EN_NAME": "Seychelles",
+    "KO_NAME": "세이셸"
+  },
+  {
+    "NATION_CODE": 654,
+    "EN_NAME": "St Helena",
+    "KO_NAME": "세인트 헬레나 섬"
+  },
+  {
+    "NATION_CODE": 662,
+    "EN_NAME": "St. Lucia",
+    "KO_NAME": "세인트루시아"
+  },
+  {
+    "NATION_CODE": 670,
+    "EN_NAME": "St. Vincent & the Grenadines",
+    "KO_NAME": "세인트빈센트그레나딘"
+  },
+  {
+    "NATION_CODE": 659,
+    "EN_NAME": "St. Kitts-Nevis",
+    "KO_NAME": "세인트키츠네비스"
+  },
+  {
+    "NATION_CODE": 706,
+    "EN_NAME": "Somalia",
+    "KO_NAME": "소말리아"
+  },
+  {
+    "NATION_CODE": 90,
+    "EN_NAME": "Solomon Islands",
+    "KO_NAME": "솔로몬제도"
+  },
+  {
+    "NATION_CODE": 736,
+    "EN_NAME": "Sudan",
+    "KO_NAME": "수단"
+  },
+  {
+    "NATION_CODE": 740,
+    "EN_NAME": "Suriname",
+    "KO_NAME": "수리남"
+  },
+  {
+    "NATION_CODE": 144,
+    "EN_NAME": "Sri Lanka",
+    "KO_NAME": "스리랑카"
+  },
+  {
+    "NATION_CODE": 752,
+    "EN_NAME": "Sweden",
+    "KO_NAME": "스웨덴"
+  },
+  {
+    "NATION_CODE": 756,
+    "EN_NAME": "Swiss",
+    "KO_NAME": "스위스"
+  },
+  {
+    "NATION_CODE": 724,
+    "EN_NAME": "Spain",
+    "KO_NAME": "스페인"
+  },
+  {
+    "NATION_CODE": 703,
+    "EN_NAME": "Slovakia",
+    "KO_NAME": "슬로바키아"
+  },
+  {
+    "NATION_CODE": 705,
+    "EN_NAME": "Slovenia",
+    "KO_NAME": "슬로베니아"
+  },
+  {
+    "NATION_CODE": 760,
+    "EN_NAME": "Syria",
+    "KO_NAME": "시리아"
+  },
+  {
+    "NATION_CODE": 694,
+    "EN_NAME": "Sierra Leone",
+    "KO_NAME": "시에라리온"
+  },
+  {
+    "NATION_CODE": 702,
+    "EN_NAME": "Singapore",
+    "KO_NAME": "싱가포르"
+  },
+  {
+    "NATION_CODE": 784,
+    "EN_NAME": "United Arab Emirates",
+    "KO_NAME": "아랍에미리트"
+  },
+  {
+    "NATION_CODE": 533,
+    "EN_NAME": "Aruba",
+    "KO_NAME": "아루바"
+  },
+  {
+    "NATION_CODE": 51,
+    "EN_NAME": "Armenia",
+    "KO_NAME": "아르메니아"
+  },
+  {
+    "NATION_CODE": 32,
+    "EN_NAME": "Argentina",
+    "KO_NAME": "아르헨티나"
+  },
+  {
+    "NATION_CODE": 352,
+    "EN_NAME": "Iceland",
+    "KO_NAME": "아이슬란드"
+  },
+  {
+    "NATION_CODE": 332,
+    "EN_NAME": "Haiti",
+    "KO_NAME": "아이티"
+  },
+  {
+    "NATION_CODE": 372,
+    "EN_NAME": "Ireland",
+    "KO_NAME": "아일랜드"
+  },
+  {
+    "NATION_CODE": 31,
+    "EN_NAME": "Azerbaijan",
+    "KO_NAME": "아제르바이잔"
+  },
+  {
+    "NATION_CODE": 4,
+    "EN_NAME": "Afghanistan",
+    "KO_NAME": "아프가니스탄"
+  },
+  {
+    "NATION_CODE": 20,
+    "EN_NAME": "Andorra",
+    "KO_NAME": "안도라"
+  },
+  {
+    "NATION_CODE": 8,
+    "EN_NAME": "Albania",
+    "KO_NAME": "알바니아"
+  },
+  {
+    "NATION_CODE": 12,
+    "EN_NAME": "Algeria",
+    "KO_NAME": "알제리"
+  },
+  {
+    "NATION_CODE": 24,
+    "EN_NAME": "Angola",
+    "KO_NAME": "앙골라"
+  },
+  {
+    "NATION_CODE": 28,
+    "EN_NAME": "Antigua and Barbuda",
+    "KO_NAME": "앤티가바부다"
+  },
+  {
+    "NATION_CODE": 660,
+    "EN_NAME": "Anguilla",
+    "KO_NAME": "앵귈라"
+  },
+  {
+    "NATION_CODE": 232,
+    "EN_NAME": "Eritrea",
+    "KO_NAME": "에리트레아"
+  },
+  {
+    "NATION_CODE": 748,
+    "EN_NAME": "Eswatini",
+    "KO_NAME": "에스와티니"
+  },
+  {
+    "NATION_CODE": 233,
+    "EN_NAME": "Estonia",
+    "KO_NAME": "에스토니아"
+  },
+  {
+    "NATION_CODE": 218,
+    "EN_NAME": "Ecuador",
+    "KO_NAME": "에콰도르"
+  },
+  {
+    "NATION_CODE": 231,
+    "EN_NAME": "ETC",
+    "KO_NAME": "에티오피아"
+  },
+  {
+    "NATION_CODE": 222,
+    "EN_NAME": "El Salvador",
+    "KO_NAME": "엘살바도르"
+  },
+  {
+    "NATION_CODE": 826,
+    "EN_NAME": "United Kingdom",
+    "KO_NAME": "영국"
+  },
+  {
+    "NATION_CODE": 10,
+    "EN_NAME": "British Antarctic Territory",
+    "KO_NAME": "영국령 남극지역"
+  },
+  {
+    "NATION_CODE": 92,
+    "EN_NAME": "British Virgin Islands",
+    "KO_NAME": "영국령 버진 아일랜드"
+  },
+  {
+    "NATION_CODE": 86,
+    "EN_NAME": "British Indian Ocean Territory",
+    "KO_NAME": "영국령 인도양 제도"
+  },
+  {
+    "NATION_CODE": 887,
+    "EN_NAME": "Yemen",
+    "KO_NAME": "예멘"
+  },
+  {
+    "NATION_CODE": 512,
+    "EN_NAME": "Oman",
+    "KO_NAME": "오만"
+  },
+  {
+    "NATION_CODE": 40,
+    "EN_NAME": "Austria",
+    "KO_NAME": "오스트리아"
+  },
+  {
+    "NATION_CODE": 340,
+    "EN_NAME": "Honduras",
+    "KO_NAME": "온두라스"
+  },
+  {
+    "NATION_CODE": 876,
+    "EN_NAME": "Wallis and Futuna",
+    "KO_NAME": "왈리스·퓌튀나"
+  },
+  {
+    "NATION_CODE": 400,
+    "EN_NAME": "Jordan",
+    "KO_NAME": "요르단"
+  },
+  {
+    "NATION_CODE": 800,
+    "EN_NAME": "Uganda",
+    "KO_NAME": "우간다"
+  },
+  {
+    "NATION_CODE": 858,
+    "EN_NAME": "Uruguay",
+    "KO_NAME": "우루과이"
+  },
+  {
+    "NATION_CODE": 860,
+    "EN_NAME": "Uzbekistan",
+    "KO_NAME": "우즈베키스탄"
+  },
+  {
+    "NATION_CODE": 804,
+    "EN_NAME": "Ukraine",
+    "KO_NAME": "우크라이나"
+  },
+  {
+    "NATION_CODE": 368,
+    "EN_NAME": "Iraq",
+    "KO_NAME": "이라크"
+  },
+  {
+    "NATION_CODE": 364,
+    "EN_NAME": "Iran",
+    "KO_NAME": "이란"
+  },
+  {
+    "NATION_CODE": 376,
+    "EN_NAME": "Israel",
+    "KO_NAME": "이스라엘"
+  },
+  {
+    "NATION_CODE": 818,
+    "EN_NAME": "Egypt",
+    "KO_NAME": "이집트"
+  },
+  {
+    "NATION_CODE": 380,
+    "EN_NAME": "Italia",
+    "KO_NAME": "이탈리아"
+  },
+  {
+    "NATION_CODE": 356,
+    "EN_NAME": "India",
+    "KO_NAME": "인도"
+  },
+  {
+    "NATION_CODE": 360,
+    "EN_NAME": "Indonesia",
+    "KO_NAME": "인도네시아"
+  },
+  {
+    "NATION_CODE": 392,
+    "EN_NAME": "Japan",
+    "KO_NAME": "일본"
+  },
+  {
+    "NATION_CODE": 388,
+    "EN_NAME": "Jamaica",
+    "KO_NAME": "자메이카"
+  },
+  {
+    "NATION_CODE": 894,
+    "EN_NAME": "Zambia",
+    "KO_NAME": "잠비아"
+  },
+  {
+    "NATION_CODE": 832,
+    "EN_NAME": "Bailiwick of Jersey",
+    "KO_NAME": "저지"
+  },
+  {
+    "NATION_CODE": 226,
+    "EN_NAME": "Equatorial Guinea",
+    "KO_NAME": "적도기니"
+  },
+  {
+    "NATION_CODE": 268,
+    "EN_NAME": "Georgia",
+    "KO_NAME": "조지아"
+  },
+  {
+    "NATION_CODE": 156,
+    "EN_NAME": "China",
+    "KO_NAME": "중국"
+  },
+  {
+    "NATION_CODE": 140,
+    "EN_NAME": "Central African Republic",
+    "KO_NAME": "중앙아프리카"
+  },
+  {
+    "NATION_CODE": 262,
+    "EN_NAME": "Djibouti",
+    "KO_NAME": "지부티"
+  },
+  {
+    "NATION_CODE": 292,
+    "EN_NAME": "Gibraltar",
+    "KO_NAME": "지브롤터"
+  },
+  {
+    "NATION_CODE": 716,
+    "EN_NAME": "Zimbabwe",
+    "KO_NAME": "짐바브웨"
+  },
+  {
+    "NATION_CODE": 148,
+    "EN_NAME": "Chad",
+    "KO_NAME": "차드"
+  },
+  {
+    "NATION_CODE": 203,
+    "EN_NAME": "Czech",
+    "KO_NAME": "체코"
+  },
+  {
+    "NATION_CODE": 152,
+    "EN_NAME": "Chile",
+    "KO_NAME": "칠레"
+  },
+  {
+    "NATION_CODE": 120,
+    "EN_NAME": "Cameroon",
+    "KO_NAME": "카메룬"
+  },
+  {
+    "NATION_CODE": 132,
+    "EN_NAME": "Cape Verde",
+    "KO_NAME": "카보베르데"
+  },
+  {
+    "NATION_CODE": 398,
+    "EN_NAME": "Kazakhstan",
+    "KO_NAME": "카자흐스탄"
+  },
+  {
+    "NATION_CODE": 634,
+    "EN_NAME": "Qatar",
+    "KO_NAME": "카타르"
+  },
+  {
+    "NATION_CODE": 116,
+    "EN_NAME": "Cambodia",
+    "KO_NAME": "캄보디아"
+  },
+  {
+    "NATION_CODE": 124,
+    "EN_NAME": "Canada",
+    "KO_NAME": "캐나다"
+  },
+  {
+    "NATION_CODE": 404,
+    "EN_NAME": "Kenya",
+    "KO_NAME": "케냐"
+  },
+  {
+    "NATION_CODE": 136,
+    "EN_NAME": "Cayman Islands",
+    "KO_NAME": "케이맨제도"
+  },
+  {
+    "NATION_CODE": 174,
+    "EN_NAME": "Comoros",
+    "KO_NAME": "코모로"
+  },
+  {
+    "NATION_CODE": 383,
+    "EN_NAME": "Kosovo",
+    "KO_NAME": "코소보"
+  },
+  {
+    "NATION_CODE": 188,
+    "EN_NAME": "Costa Rica",
+    "KO_NAME": "코스타리카"
+  },
+  {
+    "NATION_CODE": 384,
+    "EN_NAME": "Ivory Coast",
+    "KO_NAME": "코트디부아르"
+  },
+  {
+    "NATION_CODE": 170,
+    "EN_NAME": "Colombia",
+    "KO_NAME": "콜롬비아"
+  },
+  {
+    "NATION_CODE": 178,
+    "EN_NAME": "Congo",
+    "KO_NAME": "콩고"
+  },
+  {
+    "NATION_CODE": 180,
+    "EN_NAME": "Democratic Republic of Congo",
+    "KO_NAME": "콩고민주공화국"
+  },
+  {
+    "NATION_CODE": 192,
+    "EN_NAME": "Cuba",
+    "KO_NAME": "쿠바"
+  },
+  {
+    "NATION_CODE": 414,
+    "EN_NAME": "Kuwait",
+    "KO_NAME": "쿠웨이트"
+  },
+  {
+    "NATION_CODE": 184,
+    "EN_NAME": "Cook Islands",
+    "KO_NAME": "쿡제도"
+  },
+  {
+    "NATION_CODE": 191,
+    "EN_NAME": "Croatia",
+    "KO_NAME": "크로아티아"
+  },
+  {
+    "NATION_CODE": 417,
+    "EN_NAME": "Kyrgyz Republic",
+    "KO_NAME": "키르기즈공화국"
+  },
+  {
+    "NATION_CODE": 296,
+    "EN_NAME": "Kiribati",
+    "KO_NAME": "키리바시"
+  },
+  {
+    "NATION_CODE": 762,
+    "EN_NAME": "Tajikistan",
+    "KO_NAME": "타지키스탄"
+  },
+  {
+    "NATION_CODE": 834,
+    "EN_NAME": "Tanzania",
+    "KO_NAME": "탄자니아"
+  },
+  {
+    "NATION_CODE": 764,
+    "EN_NAME": "Thailand",
+    "KO_NAME": "태국"
+  },
+  {
+    "NATION_CODE": 796,
+    "EN_NAME": "Turks and Caicos Islands",
+    "KO_NAME": "터크스케이커스 제도"
+  },
+  {
+    "NATION_CODE": 768,
+    "EN_NAME": "Togo",
+    "KO_NAME": "토고"
+  },
+  {
+    "NATION_CODE": 776,
+    "EN_NAME": "Tonga",
+    "KO_NAME": "통가"
+  },
+  {
+    "NATION_CODE": 795,
+    "EN_NAME": "Turkmenistan",
+    "KO_NAME": "투르크메니스탄"
+  },
+  {
+    "NATION_CODE": 798,
+    "EN_NAME": "Tuvalu",
+    "KO_NAME": "투발루"
+  },
+  {
+    "NATION_CODE": 788,
+    "EN_NAME": "Tunisia",
+    "KO_NAME": "튀니지"
+  },
+  {
+    "NATION_CODE": 792,
+    "EN_NAME": "Republic of Turkiye",
+    "KO_NAME": "튀르키예공화국"
+  },
+  {
+    "NATION_CODE": 780,
+    "EN_NAME": "Trinidad & Tobago",
+    "KO_NAME": "트리니다드토바고"
+  },
+  {
+    "NATION_CODE": 591,
+    "EN_NAME": "Panama",
+    "KO_NAME": "파나마"
+  },
+  {
+    "NATION_CODE": 600,
+    "EN_NAME": "Paraguay",
+    "KO_NAME": "파라과이"
+  },
+  {
+    "NATION_CODE": 586,
+    "EN_NAME": "Pakistan",
+    "KO_NAME": "파키스탄"
+  },
+  {
+    "NATION_CODE": 598,
+    "EN_NAME": "Papua New Guinea",
+    "KO_NAME": "파푸아뉴기니"
+  },
+  {
+    "NATION_CODE": 585,
+    "EN_NAME": "Palau",
+    "KO_NAME": "팔라우"
+  },
+  {
+    "NATION_CODE": 275,
+    "EN_NAME": "Palestine",
+    "KO_NAME": "팔레스타인"
+  },
+  {
+    "NATION_CODE": 604,
+    "EN_NAME": "Peru",
+    "KO_NAME": "페루"
+  },
+  {
+    "NATION_CODE": 620,
+    "EN_NAME": "Portugal",
+    "KO_NAME": "포르투갈"
+  },
+  {
+    "NATION_CODE": 616,
+    "EN_NAME": "Poland",
+    "KO_NAME": "폴란드"
+  },
+  {
+    "NATION_CODE": 630,
+    "EN_NAME": "Puerto Rico",
+    "KO_NAME": "푸에르토리코"
+  },
+  {
+    "NATION_CODE": 250,
+    "EN_NAME": "France",
+    "KO_NAME": "프랑스"
+  },
+  {
+    "NATION_CODE": 254,
+    "EN_NAME": "French Guiana",
+    "KO_NAME": "프랑스령 기아나"
+  }
+]
