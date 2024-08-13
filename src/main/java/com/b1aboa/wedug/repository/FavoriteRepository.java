@@ -12,6 +12,6 @@ import com.b1aboa.wedug.entity.Favorite;
 @Repository
 public interface FavoriteRepository extends JpaRepository<Favorite, Long> {
 
-	@Query("SELECT f FROM Favorite f WHERE f.userId =:userId")
+	@Query("SELECT f FROM Favorite f WHERE f.userId.userId =:userId")
 	List<Favorite> showAllFavorites(@Param("userId") String userId);
 }

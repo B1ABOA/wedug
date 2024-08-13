@@ -21,9 +21,11 @@ public class Favorite {
 	@Column(name = "favorite_id")
 	private Long favoriteId;
 
-	@Column(name = "user_id", length = 20)
-	private String userId;
+	@ManyToOne
+	@JoinColumn(name = "userId")
+	private User userId;
 
-	@Column(name = "film_id")
-	private Long filmId;
+	@ManyToOne
+	@JoinColumn(name = "filmId")
+	private Place filmId;
 }

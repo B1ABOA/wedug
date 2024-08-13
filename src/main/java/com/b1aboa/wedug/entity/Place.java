@@ -22,11 +22,13 @@ public class Place {
     @Column(name = "film_id")
     private Long filmId;
 
-    @Column(name = "media_code", nullable = false)
-    private Long mediaCode;
+    @ManyToOne
+    @JoinColumn(name = "media_code")
+    private MediaInfo mediaCode;
 
-    @Column(name = "place_code", nullable = false)
-    private Long placeCode;
+    @ManyToOne
+    @JoinColumn(name = "place_code")
+    private PlaceInfo placeCode;
 
     @Column(name = "title", length = 100, nullable = false)
     private String title;

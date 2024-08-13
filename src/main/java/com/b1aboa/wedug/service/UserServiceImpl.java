@@ -4,7 +4,6 @@ import com.b1aboa.wedug.dto.UserDTO;
 import com.b1aboa.wedug.entity.User;
 import com.b1aboa.wedug.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +33,7 @@ public class UserServiceImpl implements  UserService{
         user.setNickname(userDTO.getNickname());
         user.setGender(userDTO.getGender());
         user.setBirthYear(userDTO.getBirthYear());
-        user.setNation(userDTO.getCountry());
+        user.setNotionCode(userDTO.getNationInfo());
 
         userRepository.save(user);
         return true;

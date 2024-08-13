@@ -1,5 +1,6 @@
 package com.b1aboa.wedug.dto;
 
+import com.b1aboa.wedug.entity.NationInfo;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,5 +20,5 @@ public class UserDTO {
 	private String confirmPassword;
 	private char gender;
 	private int birthYear;
-	private int country;
+	private NationInfo nationInfo;
 }
