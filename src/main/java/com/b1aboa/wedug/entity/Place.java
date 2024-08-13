@@ -1,9 +1,6 @@
 package com.b1aboa.wedug.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,6 +17,8 @@ import lombok.ToString;
 public class Place {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "film_id_seq")
+    @SequenceGenerator(name = "film_id_seq", sequenceName = "film_id_seq", allocationSize = 1)
     @Column(name = "film_id")
     private Long filmId;
 
@@ -50,11 +49,12 @@ public class Place {
     @Column(name = "address", length = 150, nullable = false)
     private String address;
 
-    @Column(name = "latitude", nullable = false, precision = 12, scale = 9)
+    @Column(name = "latitude", nullable = false)
     private Double latitude;
 
-    @Column(name = "longitude", nullable = false, precision = 12, scale = 9)
+    @Column(name = "longitude", nullable = false)
     private Double longitude;
+
 
     @Column(name = "phone_number", length = 20)
     private String phoneNumber;
