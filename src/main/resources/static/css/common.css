@@ -51,6 +51,7 @@ input:focus{outline: none;}
     font-size: 1.5rem;
     font-weight: bold;
     text-align: center;
+    cursor: pointer;
 }
 
 /* 네비게이션 바 스타일 */
@@ -72,6 +73,7 @@ input:focus{outline: none;}
     color: #333;
     font-size: 0.8rem;
     text-align: center;
+    cursor: pointer;
 }
 
 .nav-icon {
