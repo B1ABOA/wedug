@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <header th:fragment="header" class="header">
-    <div class="logo">WeDug</div>
+    <script th:inline="javascript">
+        function onClickMoveHome() {
+            window.location.href = '/';
+        }
+    </script>
+    <div class="logo" onclick="onClickMoveHome()">WeDug</div>
 </header>
 </html>
