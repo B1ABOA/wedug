@@ -4,23 +4,60 @@
 <body>
 <script th:inline="javascript">
     var apiKey = [[${apiKey}]];
-    var searchList = [[${searchList}]];
+    var initialSearchList = [[${searchList}]];
 </script>
-    <th:block th:replace="include/header-fragment :: header"></th:block>
-<main class="main-flex">
+
+<th:block th:replace="include/header-fragment :: header"></th:block>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<style>
+    .place-list {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .place-item {
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin-bottom: 10px;
+        padding: 10px;
+        background-color: #f9f9f9;
+        cursor: pointer;
+    }
+
+    .place-item:hover {
+        border-color: #bbb;
+        background-color: #f1f1f1;
+    }
+
+        .pagination-buttons {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .pagination-buttons button {
+        margin: 0 5px;
+    }
+    </style>
+
+    <main class="main-flex">
     <div class="search-container">
         <form id="searchForm" method="get" onsubmit="handleSearch(event)">
             <div>
                 <select class="search-option" name="media-code">
-                    <option value=100>artist</option>
-                    <option value=200>drama</option>
-                    <option value=300>movie</option>
-                    <option value=400>show</option>
+                    <option value="100">artist</option>
+                    <option value="200">drama</option>
+                    <option value="300">movie</option>
+                    <option value="400">show</option>
+                    <option value="1000">nodata</option>
                 </select>
             </div>
             <div class="search-box">
                 <input class="search-txt" type="text" name="keyword" placeholder="검색어를 입력하세요.">
-                <button class="search-button" type="submit">
+                <button class="search-button" type="submit" style="cursor:pointer;" >
                     <img src="/images/icons/search.svg">
                 </button>
             </div>
@@ -31,13 +68,23 @@
         <button onclick="findMyLocation()">내 위치 찾기</button>
     </div>
     <div class="search-results">
-        <ul id="placeList"></ul>
+        <ul id="placeList" class="place-list"></ul>
+        <div class="pagination-buttons">
+            <button id="prevButton" style="display: none;" onclick="loadPreviousResults()">이전</button>
+            <button id="nextButton" style="display: none;" onclick="loadNextResults()">다음</button>
+        </div>
+        <p id="noResultsMessage" style="display: none;">해당하는 장소가 없습니다.</p>
     </div>
+
 </main>
 <th:block th:replace="include/navbar-fragment :: navbar"></th:block>
 <th:block th:replace="include/footer-fragment :: footer"></th:block>
+
 <script>
     var map;
+    var searchResults = [];
+    var resultsPerPage = 3;
+    var currentPage = 0;
 
     function loadKakaoMaps(callback) {
         var script = document.createElement('script');
@@ -57,22 +104,56 @@
 
             map = new kakao.maps.Map(mapContainer, mapOption);
 
-            // 초기 위치 설정
+            // 현재 위치 설정 및 검색 결과 표시
             setMyLocation();
-
-            // 초기 검색 결과 표시
             displaySearchResults(initialSearchList);
         });
     }
 
     loadKakaoMaps(initMap);
 
-    function displaySearchResults(searchList) {
-        var bounds = new kakao.maps.LatLngBounds();
-        var listEl = document.getElementById('placeList');
-        listEl.innerHTML = '';
+    function calculateDistance(lat1, lon1, lat2, lon2) {
+        var R = 6371; // 지구의 반지름 (km)
+        var dLat = toRad(lat2 - lat1);
+        var dLon = toRad(lon2 - lon1);
+        var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        return R * c; // 거리 (km)
+    }
 
-        searchList.forEach(function(place) {
+    function toRad(value) {
+        return value * Math.PI / 180;
+    }
+
+   function displaySearchResults(searchList) {
+    var bounds = new kakao.maps.LatLngBounds();
+    var listEl = document.getElementById('placeList');
+    listEl.innerHTML = '';
+
+    if (searchList.length === 0) {
+        document.getElementById('noResultsMessage').style.display = 'block';
+        document.getElementById('prevButton').style.display = 'none';
+        document.getElementById('nextButton').style.display = 'none';
+        return;
+    }
+
+    document.getElementById('noResultsMessage').style.display = 'none';
+
+    // 현재 위치를 기준으로 거리 계산
+    navigator.geolocation.getCurrentPosition(function(position) {
+        var userLat = position.coords.latitude;
+        var userLon = position.coords.longitude;
+
+        var sortedPlaces = searchList.map(place => {
+            place.distance = calculateDistance(userLat, userLon, place.latitude, place.longitude);
+            return place;
+        }).sort((a, b) => a.distance - b.distance);
+
+        // Paginate results
+        var paginatedResults = sortedPlaces.slice(currentPage * resultsPerPage, (currentPage + 1) * resultsPerPage);
+        paginatedResults.forEach(function(place) {
             var placePosition = new kakao.maps.LatLng(place.latitude, place.longitude);
 
             // 마커 생성
@@ -83,7 +164,7 @@
 
             // 인포윈도우 생성
             var infowindow = new kakao.maps.InfoWindow({
-                content: '<div style="padding:5px;">' + place.title + '</div>'
+                content: '<div style="padding:5px;">' + place.title + ' place는 ' + place.place + '</div>'
             });
 
             kakao.maps.event.addListener(marker, 'mouseover', function() {
@@ -97,7 +178,9 @@
             bounds.extend(placePosition);
 
             var li = document.createElement('li');
-            li.innerHTML = '<strong>' + place.title + '</strong><br>' + place.address;
+            li.classList.add('place-item');
+
+            li.innerHTML = '<strong> [' + place.title + '] - ' + place.place + ' </strong> <br>' + ' ' + place.address + place.place;
             li.onclick = function() {
                 map.setCenter(placePosition);
             };
@@ -105,10 +188,31 @@
         });
 
         map.setBounds(bounds);
-    }
 
-    function setMyLocation() {
-        if (navigator.geolocation) {
+        // Update the display of pagination buttons
+        document.getElementById('prevButton').style.display = currentPage > 0 ? 'block' : 'none';
+        document.getElementById('nextButton').style.display = sortedPlaces.length > (currentPage + 1) * resultsPerPage ? 'block' : 'none';
+    }, function(error) {
+        console.log('Geolocation failed: ' + error.message);
+    });
+}
+
+function loadPreviousResults() {
+    if (currentPage > 0) {
+        currentPage--;
+        displaySearchResults(searchResults);
+    }
+}
+
+function loadNextResults() {
+    if ((currentPage + 1) * resultsPerPage < searchResults.length) {
+        currentPage++;
+        displaySearchResults(searchResults);
+    }
+}
+
+function setMyLocation() {
+    if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
                 var lat = position.coords.latitude;
                 var lon = position.coords.longitude;
@@ -144,27 +248,26 @@
     function findMyLocation() {
         setMyLocation();
     }
+function handleSearch(event) {
+    event.preventDefault();
 
-    function handleSearch(event) {
-        event.preventDefault();
+    var form = document.getElementById('searchForm');
+    var formData = new FormData(form);
 
-        var form = document.getElementById('searchForm');
-        var formData = new FormData(form);
+    var queryString = new URLSearchParams(formData).toString();
+    var requestUrl = '/api/places/search?' + queryString;
 
-        var queryString = new URLSearchParams(formData).toString();
-        var requestUrl = '/api/places/search?' + queryString;
-        console.log('요청 url은 ***** ' + requestUrl);
-        fetch(requestUrl, {
-            method: 'GET',
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('data는 **** ' + data);
-            // 서버로부터 받은 searchList 데이터를 지도에 반영
+    axios.get(requestUrl)
+        .then(function(response) {
+            var data = response.data;
+            currentPage = 0; // 페이지 초기화
+            searchResults = data; // 검색 결과 저장
             displaySearchResults(data);
         })
-        .catch(error => console.error('Error:', error));
-    }
+        .catch(function(error) {
+            console.error('Error:', error);
+        });
+}
 </script>
 </body>
 </html>
