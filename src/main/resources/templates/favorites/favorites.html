@@ -2,30 +2,33 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="include/head-meta-fragment :: head-mata"></th:block>
 <body>
-    <script th:inline="javascript">
-        function confirmCancelFavorite() {
-            const userConfirmed = confirm("정말로 즐겨찾기를 취소하겠습니까?");
-            if (userConfirmed) {
-                // 여기에서 즐겨찾기 취소 로직을 추가.
-                alert("즐겨찾기가 취소되었습니다.");
-            }
+<script th:inline="javascript">
+    function confirmCancelFavorite() {
+        const userConfirmed = confirm("정말로 즐겨찾기를 취소하겠습니까?");
+        if (userConfirmed) {
+            // 여기에서 즐겨찾기 취소 로직을 추가.
+            alert("즐겨찾기가 취소되었습니다.");
         }
-    </script>
-    <th:block th:replace="include/header-fragment :: header"></th:block>
-    <main class="main-block">
-        <div class="favorite-item">
-            <div class="heart-icon" onclick="confirmCancelFavorite()">
-                <img src="/images/icons/favorites.svg" alt="Heart Icon" />
+    }
+</script>
+<th:block th:replace="include/header-fragment :: header"></th:block>
+<main class="main-block">
+    <div class="favorite-items">
+        <th:block th:each="favorite : ${favoriteList}">
+            <div class="favorite-item">
+                <div class="heart-icon" onclick="confirmCancelFavorite()">
+                    <img src="/images/icons/favorites.svg" alt="Heart Icon"/>
+                </div>
+                <div class="item-details">
+                    <h3 class="item-title" th:text="${favorite.filmId.title}"></h3>
+                    <p class="item-location" th:text="'장소: ' + ${favorite.filmId.address}"></p>
+                    <p class="item-phone" th:text="'전화번호: ' + ${favorite.filmId.phoneNumber}"></p>
+                </div>
             </div>
-            <div class="item-details">
-                <h3 class="item-title">신과 함께</h3>
-                <p class="item-location">장소: 예시 장소</p>
-                <p class="item-phone">전화번호: 010-1234-5678</p>
-                <p class="item-address">주소: 서울특별시 예시구 예시로 123</p>
-            </div>
-        </div>
-    </main>
-    <th:block th:replace="include/navbar-fragment :: navbar"></th:block>
-    <th:block th:replace="include/footer-fragment :: footer"></th:block>
+        </th:block>
+    </div>
+</main>
+<th:block th:replace="include/navbar-fragment :: navbar"></th:block>
+<th:block th:replace="include/footer-fragment :: footer"></th:block>
 </body>
 </html>
