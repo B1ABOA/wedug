@@ -11,11 +11,11 @@
     <div class="search-container">
         <form id="searchForm" method="get" onsubmit="handleSearch(event)">
             <div>
-                <select class="search-option" name="media-type">
-                    <option value="artist">artist</option>
-                    <option value="drama">drama</option>
-                    <option value="movie">movie</option>
-                    <option value="show">show</option>
+                <select class="search-option" name="media-code">
+                    <option value=100>artist</option>
+                    <option value=200>drama</option>
+                    <option value=300>movie</option>
+                    <option value=400>show</option>
                 </select>
             </div>
             <div class="search-box">
@@ -153,12 +153,13 @@
 
         var queryString = new URLSearchParams(formData).toString();
         var requestUrl = '/api/places/search?' + queryString;
-
+        console.log('요청 url은 ***** ' + requestUrl);
         fetch(requestUrl, {
             method: 'GET',
         })
         .then(response => response.json())
         .then(data => {
+            console.log('data는 **** ' + data);
             // 서버로부터 받은 searchList 데이터를 지도에 반영
             displaySearchResults(data);
         })

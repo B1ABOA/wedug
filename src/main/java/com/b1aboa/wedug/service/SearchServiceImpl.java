@@ -5,6 +5,8 @@ import com.b1aboa.wedug.entity.MediaInfo;
 import com.b1aboa.wedug.entity.Place;
 import com.b1aboa.wedug.repository.MediaInfoRepository;
 import com.b1aboa.wedug.repository.PlaceRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -15,52 +17,59 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class SearchServiceImpl implements SearchService{
+public class SearchServiceImpl implements SearchService {
+
+    private static final Logger logger = LoggerFactory.getLogger(SearchServiceImpl.class);
 
     @Value("${kakao.maps.api.key}")
     private String kakaoMapsApiKey;
-    // Place 엔티티에 접근하기 위한 리포지토리
+
     private final PlaceRepository placeRepository;
-    // MediaInfo 엔티티에 접근하기 위한 리포지토리
     private final MediaInfoRepository mediaInfoRepository;
 
-    // Kakao Maps API 키
-    @Override
-    public String getKakaoMapsApiKey() {
-        return kakaoMapsApiKey;
-    }
     @Autowired
     public SearchServiceImpl(PlaceRepository placeRepository, MediaInfoRepository mediaInfoRepository) {
         this.placeRepository = placeRepository;
         this.mediaInfoRepository = mediaInfoRepository;
     }
-    // 미디어 코드로 장소 검색
-    @Override
-    public List<PlaceDTO> searchPlacesByMediaType(String mediaType) {
-        // mediaType으로 MediaInfo를 찾기
-        Optional<MediaInfo> mediaInfo = mediaInfoRepository.findByMediaType(mediaType);
 
-        // MediaInfo가 존재하면 해당 mediaCode로 Place를 검색하고 DTO로 변환.
-        return mediaInfo
-                .map(info -> placeRepository.findByMediaCode(info)
-                        .stream()
-                        .map(this::convertToPlaceDTO)
-                        .collect(Collectors.toList()))
-                .orElse(Collections.emptyList());
+    @Override
+    public String getKakaoMapsApiKey() {
+        return kakaoMapsApiKey;
     }
 
 
-    private PlaceDTO convertToPlaceDTO(Place place) {
+    @Override
+    public List<PlaceDTO> searchPlacesByMediaCode(long mediaCode) {
+        logger.info("Searching places for media code: {}", mediaCode);
+
+        Optional<MediaInfo> mediaInfo = mediaInfoRepository.findById(mediaCode);
+
+        if (mediaInfo.isPresent()) {
+            List<Place> places = placeRepository.findByMediaInfo(mediaInfo.get());
+            logger.info("Found {} places", places.size());
+            return places.stream()
+                    .map(this::convertToDTO)
+                    .collect(Collectors.toList());
+        } else {
+            logger.warn("No MediaInfo found for media code: {}", mediaCode);
+            return Collections.emptyList();
+        }
+    }
+
+    private PlaceDTO convertToDTO(Place place) {
         PlaceDTO dto = new PlaceDTO();
-//        dto.setFilmId(place.getFilmId());
+        dto.setFilmId(place.getFilmId());
         dto.setTitle(place.getTitle());
         dto.setPlace(place.getPlace());
         dto.setPlaceDescribe(place.getPlaceDescribe());
+        dto.setBusinessHour(place.getBusinessHour());
+        dto.setBreakTime(place.getBreakTime());
+        dto.setClosedDay(place.getClosedDay());
         dto.setAddress(place.getAddress());
         dto.setLatitude(place.getLatitude());
         dto.setLongitude(place.getLongitude());
-        dto.setBusinessHour(place.getBusinessHour());
-        dto.setBreakTime(place.getBreakTime());
+        dto.setPhoneNumber(place.getPhoneNumber());
         return dto;
     }
 }
