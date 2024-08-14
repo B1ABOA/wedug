@@ -17,7 +17,7 @@ import com.b1aboa.wedug.entity.Favorite;
 import com.b1aboa.wedug.service.FavoriteService;
 
 @Controller
-@RequestMapping("/favorites")
+@RequestMapping("/api/favorites")
 public class FavoritesController {
 
     @Autowired
@@ -31,13 +31,13 @@ public class FavoritesController {
             @ApiResponse(responseCode = "404", description = "User not found"),
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
-    @GetMapping("/api/users/{userId}/favorites")
+    @GetMapping("/{userId}")
     @ResponseBody
     public List<FavoriteDTO> showFavoriteList(@PathVariable("userId") String userId) {
         return favoriteService.showAllFavorites(userId);
     }
 
-    @DeleteMapping("/api/users/{userId}/favorites/places/{placeId}")
+    @DeleteMapping("/{userId}/places/{placeId}")
     @ResponseBody
     public boolean deleteUserFavorite(@PathVariable("userId") String userId, @PathVariable("placeId") long placeId) {
         if (favoriteService.deleteUserFavorite(userId, placeId) > 0)
