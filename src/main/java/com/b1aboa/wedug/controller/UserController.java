@@ -3,12 +3,14 @@ package com.b1aboa.wedug.controller;
 import com.b1aboa.wedug.dto.UserDTO;
 import com.b1aboa.wedug.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/user")
@@ -35,11 +37,15 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public String signUp(@RequestBody UserDTO userDTO, BindingResult bindingResult) {
+    public String signUp(@ModelAttribute UserDTO userDTO, BindingResult bindingResult) {
+        log.info("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        log.info(userDTO.toString());
+
         if(bindingResult.hasErrors()){
             return "user/user-signup";
         }
         if(!userDTO.getPassword().equals(userDTO.getConfirmPassword())){
+            System.out.println("비밀번호 불일치");
             return "user/user-signup";
         }
         //userService.create(userDTO.getUserId(),userDTO.getNickname(),userDTO.getPassword(),userDTO.getGender(),userDTO.getBirthYear(),userDTO.getCountry());

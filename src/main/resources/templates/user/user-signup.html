@@ -6,13 +6,13 @@
         window.onload = function() {
             axios.get('/json/nation-code.json')
                 .then(response => {
-                    const countries = response.data;
-                    const selectElement = document.getElementById('country');
+                    const nationList = response.data;
+                    const selectElement = document.getElementById('nationCode');
 
-                    countries.forEach(country => {
+                    nationList.forEach(nation => {
                         const option = document.createElement('option');
-                        option.value = country.NATION_CODE;
-                        option.textContent = country.KO_NAME;
+                        option.value = nation.NATION_CODE;
+                        option.textContent = nation.KO_NAME;
                         selectElement.appendChild(option);
                     });
 
@@ -80,8 +80,8 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="country">국가</label>
-                    <select id="country" name="country">
+                    <label for="nationCode">국가</label>
+                    <select id="nationCode" name="nationCode">
                     </select>
                 </div>
                 <div class="form-group">
