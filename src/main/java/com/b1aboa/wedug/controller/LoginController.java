@@ -9,12 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/auth")
 public class LoginController {
 
-    @GetMapping("/login")
-    public String showLoginPage() {
-        System.out.println("로그인화면");
-        return "login/login";
-    }
-
     @PostMapping("/login")
     public String login() {
         return "redirect:/";

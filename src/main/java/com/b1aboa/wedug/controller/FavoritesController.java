@@ -31,12 +31,6 @@ public class FavoritesController {
             @ApiResponse(responseCode = "404", description = "User not found"),
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
-
-    @GetMapping
-    public String showFavoritePage() {
-        return "favorites/favorites";
-    }
-
     @GetMapping("/api/users/{userId}/favorites")
     @ResponseBody
     public List<FavoriteDTO> showFavoriteList(@PathVariable("userId") String userId) {
