@@ -38,11 +38,5 @@ public class SearchController {
 
         return searchList;
     }
-//    @GetMapping("/api/places/search")
-//    public String searchPlaceMedia(@RequestParam("media-type") String mediaType, Model model) {
-//        List<PlaceDTO> searchList = searchService.searchPlacesByMediaType(mediaType);
-//        model.addAttribute("searchList", searchList);
-//        return "search/map-search";
-//    }
 
 }

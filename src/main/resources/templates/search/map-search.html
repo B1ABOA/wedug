@@ -4,44 +4,40 @@
 <body>
 <script th:inline="javascript">
     var apiKey = [[${apiKey}]];
+    var searchList = [[${searchList}]];
 </script>
     <th:block th:replace="include/header-fragment :: header"></th:block>
-    <main class="main-flex">
-        <div class="search-container">
-            <form action="#" method="get">
-                <div>
-                    <select class="search-option" name="category">
-                        <option value="100">artist</option>
-                        <option value="200">drama</option>
-                        <option value="300">movie</option>
-                        <option value="400">show</option>
-                    </select>
-                    <select class="search-option" name="place">
-                        <option value="10">cafe</option>
-                        <option value="20">playground</option>
-                        <option value="30">restaurant</option>
-                        <option value="40">stay</option>
-                        <option value="50">store</option>
-                    </select>
-                </div>
-                <div class="search-box">
-                    <input class="search-txt" type="text" name="" placeholder="검색어를 입력하세요.">
-                    <button class="search-button" type="submit">
-                        <img src="/images/icons/search.svg">
-                    </button>
-                </div>
-            </form>
-        </div>
-        <div class="map-container">
-            <!-- 지도 삽입 공간 -->
-            <div id="map">지도 영역</div>
-            <button onclick="findMyLocation()">내 위치 찾기</button>
-        </div>
-    </main>
-    <th:block th:replace="include/navbar-fragment :: navbar"></th:block>
-    <th:block th:replace="include/footer-fragment :: footer"></th:block>
+<main class="main-flex">
+    <div class="search-container">
+        <form id="searchForm" method="get" onsubmit="handleSearch(event)">
+            <div>
+                <select class="search-option" name="media-type">
+                    <option value="artist">artist</option>
+                    <option value="drama">drama</option>
+                    <option value="movie">movie</option>
+                    <option value="show">show</option>
+                </select>
+            </div>
+            <div class="search-box">
+                <input class="search-txt" type="text" name="keyword" placeholder="검색어를 입력하세요.">
+                <button class="search-button" type="submit">
+                    <img src="/images/icons/search.svg">
+                </button>
+            </div>
+        </form>
+    </div>
+    <div class="map-container">
+        <div id="map">지도 영역</div>
+        <button onclick="findMyLocation()">내 위치 찾기</button>
+    </div>
+    <div class="search-results">
+        <ul id="placeList"></ul>
+    </div>
+</main>
+<th:block th:replace="include/navbar-fragment :: navbar"></th:block>
+<th:block th:replace="include/footer-fragment :: footer"></th:block>
 <script>
-    var map; // 전역 변수로 map 선언
+    var map;
 
     function loadKakaoMaps(callback) {
         var script = document.createElement('script');
@@ -63,10 +59,54 @@
 
             // 초기 위치 설정
             setMyLocation();
+
+            // 초기 검색 결과 표시
+            displaySearchResults(initialSearchList);
         });
     }
 
-    // 내 위치 설정 함수
+    loadKakaoMaps(initMap);
+
+    function displaySearchResults(searchList) {
+        var bounds = new kakao.maps.LatLngBounds();
+        var listEl = document.getElementById('placeList');
+        listEl.innerHTML = '';
+
+        searchList.forEach(function(place) {
+            var placePosition = new kakao.maps.LatLng(place.latitude, place.longitude);
+
+            // 마커 생성
+            var marker = new kakao.maps.Marker({
+                position: placePosition
+            });
+            marker.setMap(map);
+
+            // 인포윈도우 생성
+            var infowindow = new kakao.maps.InfoWindow({
+                content: '<div style="padding:5px;">' + place.title + '</div>'
+            });
+
+            kakao.maps.event.addListener(marker, 'mouseover', function() {
+                infowindow.open(map, marker);
+            });
+
+            kakao.maps.event.addListener(marker, 'mouseout', function() {
+                infowindow.close();
+            });
+
+            bounds.extend(placePosition);
+
+            var li = document.createElement('li');
+            li.innerHTML = '<strong>' + place.title + '</strong><br>' + place.address;
+            li.onclick = function() {
+                map.setCenter(placePosition);
+            };
+            listEl.appendChild(li);
+        });
+
+        map.setBounds(bounds);
+    }
+
     function setMyLocation() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
@@ -75,19 +115,14 @@
                 var locPosition = new kakao.maps.LatLng(lat, lon);
 
                 map.setCenter(locPosition);
-
-                // 기존 마커 제거
                 removeMarker();
 
-                // 새 마커 생성
                 var marker = new kakao.maps.Marker({
                     position: locPosition
                 });
                 marker.setMap(map);
 
-                // 마커를 전역 변수에 저장
                 window.currentMarker = marker;
-
             }, function(error) {
                 console.log('Geolocation failed: ' + error.message);
             }, {
@@ -100,19 +135,35 @@
         }
     }
 
-    // 마커 제거 함수
     function removeMarker() {
         if (window.currentMarker) {
             window.currentMarker.setMap(null);
         }
     }
 
-    // 내 위치 찾기 버튼 클릭 시 실행될 함수
     function findMyLocation() {
         setMyLocation();
     }
 
-    loadKakaoMaps(initMap);
+    function handleSearch(event) {
+        event.preventDefault();
+
+        var form = document.getElementById('searchForm');
+        var formData = new FormData(form);
+
+        var queryString = new URLSearchParams(formData).toString();
+        var requestUrl = '/api/places/search?' + queryString;
+
+        fetch(requestUrl, {
+            method: 'GET',
+        })
+        .then(response => response.json())
+        .then(data => {
+            // 서버로부터 받은 searchList 데이터를 지도에 반영
+            displaySearchResults(data);
+        })
+        .catch(error => console.error('Error:', error));
+    }
 </script>
 </body>
 </html>
