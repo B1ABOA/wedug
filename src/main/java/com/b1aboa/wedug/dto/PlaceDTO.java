@@ -1,5 +1,8 @@
 package com.b1aboa.wedug.dto;
 
+import com.b1aboa.wedug.entity.MediaInfo;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
 @Data
@@ -15,4 +18,6 @@ public class PlaceDTO {
     private Double latitude;
     private Double longitude;
     private String phoneNumber;
+
+
 }

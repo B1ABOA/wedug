@@ -11,5 +11,5 @@ public interface SearchService {
     // Kakao Maps API 키를 반환하는 메서드
     String getKakaoMapsApiKey();
 
-    List<PlaceDTO> searchPlacesByMediaType(String mediaType);
+    List<PlaceDTO> searchPlacesByMediaCode(long mediaCode);
 }
