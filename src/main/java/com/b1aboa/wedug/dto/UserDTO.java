@@ -20,5 +20,6 @@ public class UserDTO {
 	private String confirmPassword;
 	private char gender;
 	private int birthYear;
-	private NationInfo nationInfo;
+	private long nationCode;
+
 }

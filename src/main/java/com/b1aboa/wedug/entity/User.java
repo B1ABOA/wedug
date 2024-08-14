@@ -36,6 +36,6 @@ public class User {
 
 	@ManyToOne
 	@JoinColumn(name = "nation_code")
-	private NationInfo notionCode;
+	private NationInfo nationCode;
 	
 }
