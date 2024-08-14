@@ -10,6 +10,10 @@ import java.util.List;
 public interface SearchService {
     // Kakao Maps API 키를 반환하는 메서드
     String getKakaoMapsApiKey();
-
+    List<PlaceDTO> getAllPlaces();
     List<PlaceDTO> searchPlacesByMediaCode(long mediaCode);
+    List<PlaceDTO> searchPlacesByMediaCodeAndPlace(long mediaCode,long placeCode);
+    List<PlaceDTO> searchPlacesByPlaceCode(long placeCode);
+    List<PlaceDTO> searchPlacesByKeyword(String keyword);
+
 }

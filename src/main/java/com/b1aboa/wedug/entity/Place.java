@@ -31,7 +31,6 @@ public class Place {
     private PlaceInfo placeCode;
 
 
-
     @Column(name = "title", length = 100, nullable = false)
     private String title;
 

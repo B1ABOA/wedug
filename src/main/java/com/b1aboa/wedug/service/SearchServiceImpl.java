@@ -3,7 +3,9 @@ package com.b1aboa.wedug.service;
 import com.b1aboa.wedug.dto.PlaceDTO;
 import com.b1aboa.wedug.entity.MediaInfo;
 import com.b1aboa.wedug.entity.Place;
+import com.b1aboa.wedug.entity.PlaceInfo;
 import com.b1aboa.wedug.repository.MediaInfoRepository;
+import com.b1aboa.wedug.repository.PlaceInfoRepository;
 import com.b1aboa.wedug.repository.PlaceRepository;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
@@ -29,10 +31,12 @@ public class SearchServiceImpl implements SearchService {
     private final MediaInfoRepository mediaInfoRepository; // MediaInfo 엔티티를 위한 레포지토리
     private final ModelMapper modelMapper; // 엔티티와 DTO 간의 변환을 위한 ModelMapper
 
+    private final PlaceInfoRepository placeInfoRepository;
     @Autowired
-    public SearchServiceImpl(PlaceRepository placeRepository, MediaInfoRepository mediaInfoRepository, ModelMapper modelMapper) {
+    public SearchServiceImpl(PlaceRepository placeRepository, MediaInfoRepository mediaInfoRepository, PlaceInfoRepository placeInfoRepository, ModelMapper modelMapper) {
         this.placeRepository = placeRepository;
         this.mediaInfoRepository = mediaInfoRepository;
+        this.placeInfoRepository = placeInfoRepository;
         this.modelMapper = modelMapper;
     }
 
@@ -41,6 +45,16 @@ public class SearchServiceImpl implements SearchService {
         return kakaoMapsApiKey; // Kakao Maps API 키 반환
     }
 
+    @Override
+    public List<PlaceDTO> getAllPlaces() {
+        logger.info("Fetching all places");
+        List<Place> places = placeRepository.findAll();
+        logger.info("Found {} places", places.size());
+
+        return places.stream()
+                .map(place -> modelMapper.map(place, PlaceDTO.class))
+                .collect(Collectors.toList());
+    }
     @Override
     public List<PlaceDTO> searchPlacesByMediaCode(long mediaCode) {
         logger.info("Searching places for media code: {}", mediaCode); // 로그에 mediaCode 기록
@@ -62,4 +76,61 @@ public class SearchServiceImpl implements SearchService {
             return Collections.emptyList(); // 빈 리스트 반환
         }
     }
+
+    @Override
+    public List<PlaceDTO> searchPlacesByMediaCodeAndPlace(long mediaCode, long placeCode) {
+        logger.info("Searching places for media code & placeCode: {} , {}", mediaCode, placeCode);
+
+        Optional<MediaInfo> mediaInfoOptional = mediaInfoRepository.findById(mediaCode);
+        Optional<PlaceInfo> placeInfoOptional = placeInfoRepository.findById(placeCode);
+
+        if (mediaInfoOptional.isPresent() && placeInfoOptional.isPresent()) {
+            MediaInfo mediaInfo = mediaInfoOptional.get();
+            PlaceInfo placeInfo = placeInfoOptional.get();
+
+            List<Place> places = placeRepository.findByMediaInfoAndPlaceCode(mediaInfo, placeInfo);
+            logger.info("Found {} places for media code {} and place code {}", places.size(), mediaCode, placeCode);
+
+            return places.stream()
+                    .map(place -> modelMapper.map(place, PlaceDTO.class))
+                    .collect(Collectors.toList());
+        } else {
+            logger.warn("No MediaInfo or PlaceInfo found for media code: {} and place code: {}", mediaCode, placeCode);
+            return Collections.emptyList();
+        }
+    }
+
+    @Override
+    public List<PlaceDTO> searchPlacesByPlaceCode(long placeCode) {
+        logger.info("Searching places for place code: {}", placeCode);
+
+        Optional<PlaceInfo> placeInfoOptional = placeInfoRepository.findById(placeCode);
+
+        if (placeInfoOptional.isPresent()) {
+            PlaceInfo placeInfo = placeInfoOptional.get();
+            List<Place> places = placeRepository.findByPlaceCode(placeInfo);
+            logger.info("Found {} places for place code {}", places.size(), placeCode);
+
+            return places.stream()
+                    .map(place -> modelMapper.map(place, PlaceDTO.class))
+                    .collect(Collectors.toList());
+        } else {
+            logger.warn("No PlaceInfo found for place code: {}", placeCode);
+            return Collections.emptyList();
+        }
+    }
+
+
+    @Override
+    public List<PlaceDTO> searchPlacesByKeyword(String keyword) {
+        logger.info("Searching places with keyword: {}", keyword);
+
+        List<Place> places = placeRepository.findByTitleOrPlaceContainingIgnoreCase(keyword);
+        logger.info("Found {} places with keyword {}", places.size(), keyword);
+
+        return places.stream()
+                .map(place -> modelMapper.map(place, PlaceDTO.class))
+                .collect(Collectors.toList());
+    }
+
 }

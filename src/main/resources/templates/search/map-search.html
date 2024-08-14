@@ -48,11 +48,19 @@
         <form id="searchForm" method="get" onsubmit="handleSearch(event)">
             <div>
                 <select class="search-option" name="media-code">
+                    <option value="">all</option>
                     <option value="100">artist</option>
                     <option value="200">drama</option>
                     <option value="300">movie</option>
                     <option value="400">show</option>
-                    <option value="1000">nodata</option>
+                </select>
+                <select class="search-option" name="place">
+                    <option value="">all</option>
+                    <option value="10">cafe</option>
+                    <option value="20">playground</option>
+                    <option value="30">restaurant</option>
+                    <option value="40">stay</option>
+                    <option value="50">store</option>
                 </select>
             </div>
             <div class="search-box">
@@ -256,6 +264,7 @@ function handleSearch(event) {
 
     var queryString = new URLSearchParams(formData).toString();
     var requestUrl = '/api/places/search?' + queryString;
+    console.log('request Url 은 ***** ' + requestUrl);
 
     axios.get(requestUrl)
         .then(function(response) {
