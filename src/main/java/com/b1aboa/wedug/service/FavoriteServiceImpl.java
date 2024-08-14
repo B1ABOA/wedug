@@ -19,8 +19,6 @@ public class FavoriteServiceImpl implements FavoriteService {
     @Autowired
     private FavoriteRepository favoriteRepository;
 
-    private ModelMapper mapper = new ModelMapper();
-
     @Override
     public List<FavoriteDTO> showAllFavorites(String userId) {
         return favoriteRepository.showAllFavorites(userId).stream()
