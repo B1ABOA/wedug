@@ -131,7 +131,58 @@ input:focus{outline: none;}
 .cta-button:hover {
     background-color: #45a049;
 }
+/* 메인 콘텐츠 스타일*/
+.top-template {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    padding: 50px 0;
+}
 
+.main-title {
+    font-size: 48px;
+    margin: 0;
+}
+
+.main-content {
+    max-width: 800px;
+    width: 100%;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.service-intro {
+    text-align: center;
+}
+
+.service-intro h2 {
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.service-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.service-list li {
+    margin-bottom: 20px;
+}
+
+.service-list h3 {
+    font-size: 28px;
+    color: #4CAF50;
+}
+
+.service-list p {
+    font-size: 18px;
+    color: #666;
+}
 /* 검색 페이지 스타일 */
 .search-container {
     display: flex;
