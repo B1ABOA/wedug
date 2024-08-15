@@ -154,14 +154,21 @@
     </div>
 
     <div class="map-container">
-        <div id="map">지도 영역</div>
-        <button onclick="findMyLocation()">내 위치 찾기</button>
+        <div id="map">지도 영역
+            <div class="position-button" onclick="findMyLocation()">
+                <img src="/images/icons/position.svg" alt="Position Icon" class="nav-icon">
+            </div>
+        </div>
     </div>
     <div class="search-results">
         <ul id="placeList" class="place-list"></ul>
         <div class="pagination-buttons">
-            <button id="prevButton" style="display: none;" onclick="loadPreviousResults()">이전</button>
-            <button id="nextButton" style="display: none;" onclick="loadNextResults()">다음</button>
+            <div  id="prevButton" style="display: none; margin-right: 10px; cursor: pointer;" onclick="loadPreviousResults()">
+                <img src="/images/icons/previous.svg" alt="Prev Icon" class="nav-icon">
+            </div>
+            <div  id="nextButton" style="display: none; cursor: pointer;" onclick="loadNextResults()">
+                <img src="/images/icons/next.svg" alt="Prev Icon" class="nav-icon">
+            </div>
         </div>
         <p id="noResultsMessage" style="display: none;">해당하는 장소가 없습니다.</p>
     </div>
