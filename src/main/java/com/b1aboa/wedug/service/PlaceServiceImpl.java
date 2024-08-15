@@ -20,9 +20,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class SearchServiceImpl implements SearchService {
+public class PlaceServiceImpl implements PlaceService {
 
-    private static final Logger logger = LoggerFactory.getLogger(SearchServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(PlaceServiceImpl.class);
 
     @Value("${kakao.maps.api.key}")
     private String kakaoMapsApiKey; // Kakao Maps API 키를 주입
@@ -33,7 +33,7 @@ public class SearchServiceImpl implements SearchService {
 
     private final PlaceInfoRepository placeInfoRepository;
     @Autowired
-    public SearchServiceImpl(PlaceRepository placeRepository, MediaInfoRepository mediaInfoRepository, PlaceInfoRepository placeInfoRepository, ModelMapper modelMapper) {
+    public PlaceServiceImpl(PlaceRepository placeRepository, MediaInfoRepository mediaInfoRepository, PlaceInfoRepository placeInfoRepository, ModelMapper modelMapper) {
         this.placeRepository = placeRepository;
         this.mediaInfoRepository = mediaInfoRepository;
         this.placeInfoRepository = placeInfoRepository;

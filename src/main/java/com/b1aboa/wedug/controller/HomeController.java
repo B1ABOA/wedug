@@ -1,6 +1,6 @@
 package com.b1aboa.wedug.controller;
 
-import com.b1aboa.wedug.service.SearchService;
+import com.b1aboa.wedug.service.PlaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/")
 public class HomeController {
-    SearchService searchService;
+    PlaceService searchService;
 
     @Autowired
-    public HomeController(SearchService searchService) {
+    public HomeController(PlaceService searchService) {
         this.searchService = searchService;
     }
 

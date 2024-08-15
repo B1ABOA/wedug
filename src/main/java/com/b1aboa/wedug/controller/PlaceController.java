@@ -1,14 +1,14 @@
 package com.b1aboa.wedug.controller;
 
 import com.b1aboa.wedug.dto.PlaceDTO;
-import com.b1aboa.wedug.service.SearchService;
+import com.b1aboa.wedug.dto.PlaceSearchLogDTO;
+import com.b1aboa.wedug.service.PlaceService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -16,13 +16,13 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/api/places")
-public class SearchController {
-    private static final Logger logger = LoggerFactory.getLogger(SearchController.class);
+public class PlaceController {
+    private static final Logger logger = LoggerFactory.getLogger(PlaceController.class);
 
-    private final SearchService searchService;
+    private final PlaceService searchService;
 
     @Autowired
-    public SearchController(SearchService mapService) {
+    public PlaceController(PlaceService mapService) {
         this.searchService = mapService;
     }
 
@@ -71,5 +71,10 @@ public class SearchController {
         }
     }
 
+    @PostMapping("/search/log")
+    public ResponseEntity<String> logPlaceSearch(@RequestBody PlaceSearchLogDTO logDTO) {
+        logger.info("Place search log - User ID: {}, Place ID: {}", logDTO.getUserId(), logDTO.getPlaceId());
+        return ResponseEntity.ok("Log recorded successfully");
+    }
 
 }
