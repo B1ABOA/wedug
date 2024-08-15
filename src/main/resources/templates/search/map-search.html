@@ -32,7 +32,7 @@
         background-color: #f1f1f1;
     }
 
-        .pagination-buttons {
+    .pagination-buttons {
         display: flex;
         justify-content: center;
         margin-top: 20px;
@@ -41,18 +41,93 @@
     .pagination-buttons button {
         margin: 0 5px;
     }
-    </style>
+    .place-details {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        z-index: 1000;
+        width: 80%;
+        max-width: 500px;
+    }
 
-    <main class="main-flex">
+    .place-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    .place-details h3 {
+        margin: 0;
+        color: #333;
+        font-size: 1.5em;
+    }
+
+    .place-details p {
+        margin: 10px 0;
+        color: #666;
+        line-height: 1.6;
+    }
+
+    .favorite-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+    }
+
+    .favorite-btn img {
+        width: 24px;
+        height: 24px;
+        transition: transform 0.3s ease;
+    }
+
+    .favorite-btn:hover img {
+        transform: scale(1.1);
+    }
+
+    .close-btn {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 20px;
+        transition: background-color 0.3s ease;
+    }
+
+    .close-btn:hover {
+        background-color: #0056b3;
+    }
+
+</style>
+
+<main class="main-flex">
     <div class="search-container">
         <form id="searchForm" method="get" onsubmit="handleSearch(event)">
             <div>
                 <select class="search-option" name="media-code">
+                    <option value="">all</option>
                     <option value="100">artist</option>
                     <option value="200">drama</option>
                     <option value="300">movie</option>
                     <option value="400">show</option>
-                    <option value="1000">nodata</option>
+                </select>
+                <select class="search-option" name="place">
+                    <option value="">all</option>
+                    <option value="10">cafe</option>
+                    <option value="20">playground</option>
+                    <option value="30">restaurant</option>
+                    <option value="40">stay</option>
+                    <option value="50">store</option>
                 </select>
             </div>
             <div class="search-box">
@@ -63,6 +138,21 @@
             </div>
         </form>
     </div>
+    <div id="placeDetails" class="place-details" style="display: none;">
+        <div class="place-header">
+            <h3 id="placeTitle"></h3>
+            <button class="favorite-btn">
+                <img src="/images/icons/heart.svg" alt="Favorite" id="favoriteIcon">
+            </button>
+        </div>
+        <p id="placeAddress"></p>
+        <p id="placeDescription"></p>
+        <p id="placeBusinessHours"></p>
+        <p id="placeClosedDay"></p>
+        <p id="placeNumber"></p>
+        <button class="close-btn" onclick="closeDetails()">닫기</button>
+    </div>
+
     <div class="map-container">
         <div id="map">지도 영역</div>
         <button onclick="findMyLocation()">내 위치 찾기</button>
@@ -164,7 +254,7 @@
 
             // 인포윈도우 생성
             var infowindow = new kakao.maps.InfoWindow({
-                content: '<div style="padding:5px;">' + place.title + ' place는 ' + place.place + '</div>'
+                content: '<div style="padding:5px;">' + place.place + '</div>'
             });
 
             kakao.maps.event.addListener(marker, 'mouseover', function() {
@@ -182,19 +272,48 @@
 
             li.innerHTML = '<strong> [' + place.title + '] - ' + place.place + ' </strong> <br>' + ' ' + place.address + place.place;
             li.onclick = function() {
+                showPlaceDetail(place);
                 map.setCenter(placePosition);
             };
             listEl.appendChild(li);
         });
 
         map.setBounds(bounds);
-
-        // Update the display of pagination buttons
         document.getElementById('prevButton').style.display = currentPage > 0 ? 'block' : 'none';
         document.getElementById('nextButton').style.display = sortedPlaces.length > (currentPage + 1) * resultsPerPage ? 'block' : 'none';
     }, function(error) {
         console.log('Geolocation failed: ' + error.message);
     });
+}
+
+function showPlaceDetail(place) {
+
+    console.log('place 정보는 *****' + place);
+    document.getElementById('placeDetails').style.display = 'block';
+    document.getElementById('placeTitle').innerHTML = '<strong>' +  place.title +'</strong>';
+    document.getElementById('placeAddress').textContent = '[Address]: ' + place.address;
+    document.getElementById('placeDescription').textContent = '[Description]: ' + (place.placeDescribe || 'No Description :(');
+    document.getElementById('placeBusinessHours').textContent = '[Business Hours]: ' + (place.businessHour || 'No Information :(');
+    document.getElementById('placeClosedDay').textContent = '[Closed Days]: ' + (place.closedDay || 'No Information :(');
+    document.getElementById('placeNumber').textContent = '[Number]: ' + (place.phoneNumber || 'No Information :(');
+
+<!--     const userId = localStorage.getItem('userId');-->
+
+    axios.post('/api/places/search/log', {
+<!--        userId: userId,-->
+        placeId: place.filmId
+    })
+    .then(function(response) {
+        console.log('Log saved successfully');
+    })
+    .catch(function(error) {
+        console.error('Error saving log:', error);
+    });
+
+}
+
+function closeDetails() {
+    document.getElementById('placeDetails').style.display = 'none';
 }
 
 function loadPreviousResults() {
@@ -256,6 +375,7 @@ function handleSearch(event) {
 
     var queryString = new URLSearchParams(formData).toString();
     var requestUrl = '/api/places/search?' + queryString;
+    console.log('request Url 은 ***** ' + requestUrl);
 
     axios.get(requestUrl)
         .then(function(response) {

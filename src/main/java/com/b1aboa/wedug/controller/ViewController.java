@@ -1,11 +1,22 @@
 package com.b1aboa.wedug.controller;
 
+import com.b1aboa.wedug.service.PlaceService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class ViewController {
+
+    PlaceService placeService;
+
+    @Autowired
+    public ViewController(PlaceService placeService) {
+        this.placeService = placeService;
+    }
+
 
     @GetMapping("/")
     public String showIndexPage() {
@@ -41,4 +52,10 @@ public class ViewController {
         return "favorites/favorites";
     }
 
+
+    @GetMapping("search")
+    public String showMap(Model model) {
+        model.addAttribute("apiKey", placeService.getKakaoMapsApiKey());
+        return "search/map-search";
+    }
 }
