@@ -8,7 +8,7 @@
 }
 
 html, body {
-    height:100%;
+    height: 100%;
     font-family: Arial, sans-serif;
     background-color: #f8f8f8;
     color: #333;
@@ -25,14 +25,19 @@ body {
 ol, ul {
     list-style: none;
 }
-a{
+
+a {
     text-decoration: none;
 }
+
 blockquote, q {
     quotes: none;
 }
 
-input:focus{outline: none;}
+input:focus {
+    outline: none;
+}
+
 /*-----------------------------------------------------*/
 
 /*---- 레이아웃 조각 -------------------------------------*/
@@ -122,7 +127,6 @@ input:focus{outline: none;}
 }
 
 
-
 .main-content {
     padding: 20px;
     background-color: #fff;
@@ -131,6 +135,7 @@ input:focus{outline: none;}
 .cta-button:hover {
     background-color: #45a049;
 }
+
 /* 메인 콘텐츠 스타일*/
 .top-template {
     width: 100%;
@@ -183,6 +188,7 @@ input:focus{outline: none;}
     font-size: 18px;
     color: #666;
 }
+
 /* 검색 페이지 스타일 */
 .search-container {
     display: flex;
@@ -244,7 +250,8 @@ input:focus{outline: none;}
     justify-content: center;
     align-items: center;
 }
-.search-button img{
+
+.search-button img {
     width: 20px;
     height: 20px;
 }
@@ -378,19 +385,22 @@ input:focus{outline: none;}
 }
 
 /* 에러 페이지 스타일 */
-.sub05-txt{
+.sub05-txt {
     text-align: center;
 }
-.sub05-txt img{
+
+.sub05-txt img {
     margin: 0 auto;
 }
-.sub05-txt h3{
-    font-size:1.375rem;
+
+.sub05-txt h3 {
+    font-size: 1.375rem;
     margin: 16px 0;
     font-weight: 500;
 }
-.sub05-txt p{
-    font-size:0.813rem;
+
+.sub05-txt p {
+    font-size: 0.813rem;
     color: #ababab;
     white-space: pre-line;
     line-height: 1.38em;
@@ -403,4 +413,18 @@ input:focus{outline: none;}
         max-width: 600px;
         min-height: 100vh;
     }
+}
+
+/* 즐겨찾기 없을 때 보여줄 메시지 스타일 */
+.centered-flexbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh; /* 필요에 따라 높이 값을 조정 */
+}
+
+.no-favorites-message p {
+    text-align: center;
+    color: #9a9a9a;
+    font-size: large;
 }

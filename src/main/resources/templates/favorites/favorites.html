@@ -2,32 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="include/head-meta-fragment :: head-mata"></th:block>
 <body>
-<script th:inline="javascript">
-    function confirmCancelFavorite(placeId) {
-        const userConfirmed = confirm("즐겨찾기를 해제할까요?");
-
-        if (userConfirmed) {
-            const userId = 'joowon';
-            const requestUrl = `http://localhost:80/favorites/api/users/${userId}/favorites/places/${placeId}`;
-
-            axios.delete(requestUrl)
-                .then(response => {
-                    const result = response.data;
-
-                    if (result) {
-                        alert("즐겨찾기가 해지되었습니다.");
-                        fetchFavorites();
-                    } else {
-                        alert("즐겨찾기 취소에 실패했습니다.");
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-        }
-    }
-</script>
-
 <th:block th:replace="include/header-fragment :: header"></th:block>
 
 <main class="main-block">
@@ -37,20 +11,25 @@
 <th:block th:replace="include/navbar-fragment :: navbar"></th:block>
 <th:block th:replace="include/footer-fragment :: footer"></th:block>
 
-<script>
+<script th:inline="javascript">
     document.addEventListener('DOMContentLoaded', function () {
         fetchFavorites();
     });
 
     function fetchFavorites() {
         const userId = 'joowon';
-        const requestUrl = `/favorites/api/users/${userId}/favorites`;
+        const requestUrl = `/api/favorites/${userId}`;
 
         fetch(requestUrl)
             .then(response => response.json())
             .then(data => {
-                console.log(data);
-                updateFavoriteList(data);
+                if (data.length === 0) {
+                    showEmptyFavoritesMessage();
+                } else {
+                    console.log(data)
+                    updateFavoriteList(data);
+                }
+                console.log("hihihi")
             })
             .catch(error => console.error('Error:', error));
     }
@@ -77,6 +56,43 @@
                 `;
             mainBlock.appendChild(favoriteItem);
         });
+    }
+
+    function confirmCancelFavorite(placeId) {
+        const userConfirmed = confirm("즐겨찾기를 해제할까요?");
+
+        if (userConfirmed) {
+            const userId = 'joowon';
+            const requestUrl = `http://localhost:80/api/favorites/${userId}/places/${placeId}`;
+
+            axios.delete(requestUrl)
+                .then(response => {
+                    const result = response.data;
+
+                    if (result) {
+                        alert("즐겨찾기가 해지되었습니다.");
+                        fetchFavorites();
+                    } else {
+                        alert("즐겨찾기 취소에 실패했습니다.");
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+    }
+
+    function showEmptyFavoritesMessage() {
+        const mainBlock = document.querySelector('.main-block .favorite-items');
+        mainBlock.innerHTML = '';
+        mainBlock.classList.add('centered-flexbox');
+
+        const emptyFavorites = document.createElement('div');
+        emptyFavorites.className = 'no-favorites-message';
+        emptyFavorites.innerHTML = `
+           <p>가고싶은 장소를 즐겨찾기에 등록해보세요!</p>
+        `;
+        mainBlock.appendChild(emptyFavorites);
     }
 </script>
 </body>
