@@ -25,7 +25,7 @@ public class UserServiceImpl implements  UserService{
         User user = new User();
         NationInfo nationInfo = new NationInfo();
 
-        if(userRepository.findById(userDTO.getUserId()).isPresent()){
+        if(userRepository.existsByUserId(userDTO.getUserId())){
             System.out.println("아이디 중복");
             return false;
         }
