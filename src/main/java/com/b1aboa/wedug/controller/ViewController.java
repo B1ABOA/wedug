@@ -23,7 +23,7 @@ public class ViewController {
         return "index";
     }
 
-    @GetMapping("/auth/login")
+    @GetMapping("/user/login")
     public String showLoginPage() {
         System.out.println("로그인화면");
         return "login/login";
