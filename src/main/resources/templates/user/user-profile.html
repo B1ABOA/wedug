@@ -2,26 +2,59 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="include/head-meta-fragment :: head-mata"></th:block>
 <body>
-    <script th:inline="javascript">
-        window.onload = function() {
-            axios.get('/json/nation-code.json')
-                .then(response => {
-                    const countries = response.data;
-                    const selectElement = document.getElementById('country');
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script th:inline="javascript">
+    window.onload = function() {
+        // 국가 코드 로딩
+        loadCountries();
 
-                    countries.forEach(country => {
-                        const option = document.createElement('option');
-                        option.value = country.NATION_CODE;
-                        option.textContent = country.KO_NAME;
-                        selectElement.appendChild(option);
-                    });
+        // 사용자 정보 로딩
+        loadUserInfo();
+    }
 
-                })
-                .catch(error => {
-                    console.error('Error loading JSON data:', error);
+    function loadCountries() {
+        axios.get('/json/nation-code.json')
+            .then(response => {
+                const countries = response.data;
+                const selectElement = document.getElementById('country');
+
+                countries.forEach(country => {
+                    const option = document.createElement('option');
+                    option.value = country.NATION_CODE;
+                    option.textContent = country.KO_NAME;
+                    selectElement.appendChild(option);
                 });
+            })
+            .catch(error => {
+                console.error('Error loading JSON data:', error);
+            });
+    }
+
+    function loadUserInfo() {
+        const token = localStorage.getItem('authToken');
+        if (!token) {
+            console.error('No token found');
+            return;
         }
-    </script>
+        console.log("********" + token);
+        axios.get('/user/info', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+            .then(response => {
+                const user = response.data;
+                document.getElementById('userId').value = user.userId;
+                document.getElementById('nickname').value = user.nickname;
+                document.getElementById('gender').value = user.gender;
+                document.getElementById('birthYear').value = user.birthYear;
+                document.getElementById('country').value = user.country;
+            })
+            .catch(error => {
+                console.error('Error loading user info:', error);
+            });
+    }
+</script>
     <th:block th:replace="include/header-fragment :: header"></th:block>
     <main class="main-flex">
         <div class="signup-container">
