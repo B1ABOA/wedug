@@ -13,7 +13,7 @@
     }
 
     function loadCountries() {
-        axios.get('/json/nation-code.json')
+        axios.get('/api/nation-code')
             .then(response => {
                 const countries = response.data;
                 const selectElement = document.getElementById('country');
@@ -56,10 +56,11 @@
     }
 </script>
     <th:block th:replace="include/header-fragment :: header"></th:block>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <main class="main-flex">
         <div class="signup-container">
             <h2>마이페이지</h2>
-            <form th:action="@{/user/signup}" method="post" class="login-form">
+            <form th:action="@{/user/update}" method="post" class="login-form">
                 <div class="form-group">
                     <label for="userId">아이디</label>
                     <input type="text" id="userId" name="userId" readonly>

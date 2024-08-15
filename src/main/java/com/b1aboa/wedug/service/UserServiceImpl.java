@@ -6,7 +6,6 @@ import com.b1aboa.wedug.entity.User;
 import com.b1aboa.wedug.repository.NationInfoRepository;
 import com.b1aboa.wedug.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -48,6 +47,12 @@ public class UserServiceImpl implements  UserService{
     public UserDTO getUserInfo(String userId) {
         User user = userRepository.findByUserId(userId);
         return modelMapper.map(user, UserDTO.class);
+    }
+
+    @Override
+    public void updateUser(UserDTO userDto) {
+        User user = modelMapper.map(userDto, User.class);
+        userRepository.save(user);
     }
 
 
