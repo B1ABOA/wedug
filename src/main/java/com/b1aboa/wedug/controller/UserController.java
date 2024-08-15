@@ -17,22 +17,10 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping
-    public String showUserPage() {
-
-        return "user/user-profile";
-    }
-
     @PostMapping
     public String updateUserProfile() {
         System.out.println("정보 수정 완료");
         return "redirect:/";
-    }
-
-    @GetMapping("/signup")
-    public String showSignUpPage() {
-
-        return "user/user-signup";
     }
 
     @PostMapping("/signup")
@@ -50,12 +38,6 @@ public class UserController {
             System.out.println("회원가입 축하뽀카");
         };
         return "redirect:/";
-    }
-
-    @GetMapping("/find-password")
-    public String showFindPasswordPage() {
-
-        return "user/user-find-password";
     }
 
     @PostMapping("/find-password")

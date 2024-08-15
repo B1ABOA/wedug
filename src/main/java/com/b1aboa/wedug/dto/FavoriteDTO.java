@@ -1,21 +1,19 @@
 package com.b1aboa.wedug.dto;
 
-
+import com.b1aboa.wedug.entity.Place;
+import com.b1aboa.wedug.entity.User;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
-public class PlaceDTO {
+@Builder
+public class FavoriteDTO {
+    private Long favoriteId;
+    private String userId;
     private Long filmId;
     private String title;
     private String place;
     private String placeDescribe;
-    private String businessHour;
-    private String breakTime;
-    private String closedDay;
     private String address;
-    private Double latitude;
-    private Double longitude;
     private String phoneNumber;
-
-
 }

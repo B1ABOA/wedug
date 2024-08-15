@@ -2,33 +2,98 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="include/head-meta-fragment :: head-mata"></th:block>
 <body>
-<script th:inline="javascript">
-    function confirmCancelFavorite() {
-        const userConfirmed = confirm("정말로 즐겨찾기를 취소하겠습니까?");
-        if (userConfirmed) {
-            // 여기에서 즐겨찾기 취소 로직을 추가.
-            alert("즐겨찾기가 취소되었습니다.");
-        }
-    }
-</script>
 <th:block th:replace="include/header-fragment :: header"></th:block>
+
 <main class="main-block">
-    <div class="favorite-items">
-        <th:block th:each="favorite : ${favoriteList}">
-            <div class="favorite-item">
-                <div class="heart-icon" onclick="confirmCancelFavorite()">
-                    <img src="/images/icons/favorites.svg" alt="Heart Icon"/>
-                </div>
-                <div class="item-details">
-                    <h3 class="item-title" th:text="${favorite.filmId.title}"></h3>
-                    <p class="item-location" th:text="'장소: ' + ${favorite.filmId.address}"></p>
-                    <p class="item-phone" th:text="'전화번호: ' + ${favorite.filmId.phoneNumber}"></p>
-                </div>
-            </div>
-        </th:block>
-    </div>
+    <div class="favorite-items"></div>
 </main>
+
 <th:block th:replace="include/navbar-fragment :: navbar"></th:block>
 <th:block th:replace="include/footer-fragment :: footer"></th:block>
+
+<script th:inline="javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+        fetchFavorites();
+    });
+
+    function fetchFavorites() {
+        const userId = 'joowon';
+        const requestUrl = `/api/favorites/${userId}`;
+
+        fetch(requestUrl)
+            .then(response => response.json())
+            .then(data => {
+                if (data.length === 0) {
+                    showEmptyFavoritesMessage();
+                } else {
+                    console.log(data)
+                    updateFavoriteList(data);
+                }
+                console.log("hihihi")
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    function updateFavoriteList(favorites) {
+        const mainBlock = document.querySelector('.main-block .favorite-items');
+
+        mainBlock.innerHTML = '';
+
+        favorites.forEach(favorite => {
+            const favoriteItem = document.createElement('div');
+            favoriteItem.className = 'favorite-item';
+
+            favoriteItem.innerHTML = `
+                   <div class="heart-icon" onclick="confirmCancelFavorite('${favorite.filmId}')">
+                        <img src="/images/icons/favorites.svg" alt="Heart Icon"/>
+                    </div>
+                    <div class="item-details">
+                        <h3 class="item-title">${favorite.title}</h3>
+                        <p class="item-location">미디어: ${favorite.place}</p>
+                        <p class="item-location">주소: ${favorite.address}</p>
+                        <p class="item-phone">전화번호: ${favorite.phoneNumber}</p>
+                    </div>
+                `;
+            mainBlock.appendChild(favoriteItem);
+        });
+    }
+
+    function confirmCancelFavorite(placeId) {
+        const userConfirmed = confirm("즐겨찾기를 해제할까요?");
+
+        if (userConfirmed) {
+            const userId = 'joowon';
+            const requestUrl = `http://localhost:80/api/favorites/${userId}/places/${placeId}`;
+
+            axios.delete(requestUrl)
+                .then(response => {
+                    const result = response.data;
+
+                    if (result) {
+                        alert("즐겨찾기가 해지되었습니다.");
+                        fetchFavorites();
+                    } else {
+                        alert("즐겨찾기 취소에 실패했습니다.");
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+    }
+
+    function showEmptyFavoritesMessage() {
+        const mainBlock = document.querySelector('.main-block .favorite-items');
+        mainBlock.innerHTML = '';
+        mainBlock.classList.add('centered-flexbox');
+
+        const emptyFavorites = document.createElement('div');
+        emptyFavorites.className = 'no-favorites-message';
+        emptyFavorites.innerHTML = `
+           <p>가고싶은 장소를 즐겨찾기에 등록해보세요!</p>
+        `;
+        mainBlock.appendChild(emptyFavorites);
+    }
+</script>
 </body>
 </html>

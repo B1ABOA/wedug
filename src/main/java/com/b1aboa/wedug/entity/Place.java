@@ -24,11 +24,12 @@ public class Place {
 
     @ManyToOne
     @JoinColumn(name = "media_code")
-    private MediaInfo mediaCode;
+    private MediaInfo mediaInfo;  // mediaCode에서 mediaInfo로 변경
 
     @ManyToOne
     @JoinColumn(name = "place_code")
     private PlaceInfo placeCode;
+
 
     @Column(name = "title", length = 100, nullable = false)
     private String title;
