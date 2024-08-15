@@ -267,6 +267,26 @@ input:focus {
     border-radius: 4px;
 }
 
+.position-button {
+    position: absolute; 
+    bottom: 10px;
+    right: 10px;
+    z-index: 1000;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: white;
+    width: 30px;
+    height: 30px;
+}
+
+.position-button img {
+    width: 30px;
+    height: 30px;
+}
+
 /* 로그인 페이지 스타일 & 회원가입 페이지 스타일 */
 .login-container {
     max-width: 400px;
