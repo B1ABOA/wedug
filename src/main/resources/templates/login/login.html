@@ -5,6 +5,47 @@
 <script th:inline="javascript">
 
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelector('.login-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // 기본 폼 제출 방지
+
+            // 폼 데이터 수집
+            const formData = new FormData(event.target);
+            const urlEncodedData = new URLSearchParams(formData).toString();
+
+            // JSON 형태로 데이터 전송
+            fetch('/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: urlEncodedData,
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json(); // JSON 응답으로 파싱
+                })
+                .then(data => {
+                    if (data.token) {
+                        // 성공적으로 로그인 시 로컬 스토리지에 토큰 저장
+                        localStorage.setItem('authToken', data.token);
+                        // 로그인 후 페이지 이동 등 추가 작업 가능
+                        console.log('로그인 성공, 토큰:', data.token);
+                        window.location.href = '/'; // 성공 후 리다이렉션
+                    } else {
+                        // 로그인 실패 시 처리
+                        console.error('로그인 실패');
+                    }
+                })
+                .catch(error => {
+                    console.error('오류 발생:', error);
+                });
+        });
+    });
+</script>
 <th:block th:replace="include/header-fragment :: header"></th:block>
 <main class="main-flex">
     <div class="login-container">
@@ -35,5 +76,6 @@
 </main>
 <th:block th:replace="include/navbar-fragment :: navbar"></th:block>
 <th:block th:replace="include/footer-fragment :: footer"></th:block>
+
 </body>
 </html>
