@@ -6,6 +6,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -53,6 +55,13 @@ public class UserController {
     public String findPassword() {
 
         return "redirect:/";
+    }
+
+    @GetMapping("/info")
+    public ResponseEntity<UserDTO> getUserInfo(Authentication authentication) {
+        String userId = authentication.getName();
+        UserDTO userDto = userService.getUserInfo(userId);
+        return ResponseEntity.ok(userDto);
     }
 
 }

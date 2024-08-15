@@ -7,6 +7,7 @@ import com.b1aboa.wedug.repository.NationInfoRepository;
 import com.b1aboa.wedug.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,7 @@ public class UserServiceImpl implements  UserService{
     private final UserRepository userRepository;
     private final NationInfoRepository nationInfoRepository;
     private final PasswordEncoder passwordEncoder;
-
+    private final ModelMapper modelMapper;
     public boolean createUser(UserDTO userDTO) {
         if (userDTO == null) return false;
 
@@ -43,4 +44,12 @@ public class UserServiceImpl implements  UserService{
         userRepository.save(user);
         return true;
     }
+    @Override
+    public UserDTO getUserInfo(String userId) {
+        User user = userRepository.findByUserId(userId);
+        return modelMapper.map(user, UserDTO.class);
+    }
+
+
+
 }
