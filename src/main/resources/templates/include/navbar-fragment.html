@@ -22,6 +22,8 @@
                             break;
                         case 'favorites':
                             // 세션에서 로그인 아이디 들고옴
+                            const token = localStorage.getItem('authToken'); // 로컬 스토리지에서 토큰 가져오기
+
                             const userId = "joowon";
                             // 세션에 로그인 아이디 있으면 즐겨찾기 이동 아니면 로그인으로 이동
                             if (token) {

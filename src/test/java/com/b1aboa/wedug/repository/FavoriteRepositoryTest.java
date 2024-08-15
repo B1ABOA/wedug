@@ -17,7 +17,7 @@ class FavoriteRepositoryTest {
 
     @Test
     public void aa() {
-        List<FavoriteDTO> favoriteList =  favoriteRepository.showAllFavorites("joowon");
+        List<Favorite> favoriteList =  favoriteRepository.showAllFavorites("joowon");
         System.out.println("================");
         System.out.println("favoriteList:" + favoriteList);
     }

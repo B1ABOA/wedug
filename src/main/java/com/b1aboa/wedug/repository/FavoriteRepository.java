@@ -23,4 +23,12 @@ public interface FavoriteRepository extends JpaRepository<Favorite, Long> {
     @Modifying
     @Query("DELETE FROM Favorite f WHERE f.userId.userId =:userId AND f.filmId.filmId =:placeId")
     int deleteUserFavorite(@Param("userId") String userId, @Param("placeId") long placeId);
+
+    @Query("SELECT f FROM Favorite f WHERE f.userId.userId =:userId AND f.filmId.filmId =:placeId")
+    List<Favorite> isUserFavorite(@Param("userId") String userId, @Param("placeId") long placeId);
+
+    @Transactional
+    @Modifying
+    @Query(value = "INSERT INTO Favorite(favorite_id, user_id, film_id) VALUES (favorite_id_seq.NEXTVAL, :userId, :placeId)", nativeQuery = true)
+    int addUserFavorite(@Param("userId") String userId, @Param("placeId") long placeId);
 }

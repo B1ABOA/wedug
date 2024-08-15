@@ -39,4 +39,17 @@ public class FavoriteServiceImpl implements FavoriteService {
     public int deleteUserFavorite(String userId, long placeId) {
         return favoriteRepository.deleteUserFavorite(userId, placeId);
     }
+
+    @Override
+    public boolean isUserFavorite(String userId, long placeId) {
+        if (favoriteRepository.isUserFavorite(userId, placeId).size() == 0) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int addUserFavorite(String userId, long placeId) {
+        return favoriteRepository.addUserFavorite(userId, placeId);
+    }
 }

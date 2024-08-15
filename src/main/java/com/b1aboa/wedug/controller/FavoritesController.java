@@ -44,4 +44,20 @@ public class FavoritesController {
             return true;
         return false;
     }
+
+    @GetMapping("/check/{userId}/{placeId}")
+    @ResponseBody
+    public boolean isUserFavorite(@PathVariable("userId") String userId, @PathVariable("placeId") long placeId) {
+        if (favoriteService.isUserFavorite(userId, placeId))
+            return true;
+        return false;
+    }
+
+    @GetMapping("/{userId}/places/{placeId}")
+    @ResponseBody
+    public boolean addUserFavorite(@PathVariable("userId") String userId, @PathVariable("placeId") long placeId) {
+        if (favoriteService.addUserFavorite(userId, placeId) > 0)
+            return true;
+        return false;
+    }
 }

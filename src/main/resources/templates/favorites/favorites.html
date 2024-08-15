@@ -17,8 +17,16 @@
     });
 
     function fetchFavorites() {
-        const userId = 'joowon';
+        const token = localStorage.getItem('authToken'); // 로컬 스토리지에서 토큰 가져오기
+
+        alert(token);
+
+        // const userId = parseJwt(token); // JWT에서 userId 추출
+        // alert(userId);
+        const userId = 'joowon'
         const requestUrl = `/api/favorites/${userId}`;
+
+        alert(requestUrl)
 
         fetch(requestUrl)
             .then(response => response.json())
@@ -29,7 +37,6 @@
                     console.log(data)
                     updateFavoriteList(data);
                 }
-                console.log("hihihi")
             })
             .catch(error => console.error('Error:', error));
     }
@@ -44,8 +51,8 @@
             favoriteItem.className = 'favorite-item';
 
             favoriteItem.innerHTML = `
-                   <div class="heart-icon" onclick="confirmCancelFavorite('${favorite.filmId}')">
-                        <img src="/images/icons/favorites.svg" alt="Heart Icon"/>
+                   <div class="heart-icon" onclick="deleteUserFavorite('${favorite.filmId}')">
+                        <img src="/images/icons/heart-filled.svg" alt="Heart Icon"/>
                     </div>
                     <div class="item-details">
                         <h3 class="item-title">${favorite.title}</h3>
@@ -58,7 +65,7 @@
         });
     }
 
-    function confirmCancelFavorite(placeId) {
+    function deleteUserFavorite(placeId) {
         const userConfirmed = confirm("즐겨찾기를 해제할까요?");
 
         if (userConfirmed) {
