@@ -2,6 +2,7 @@ package com.b1aboa.wedug.controller;
 
 import com.b1aboa.wedug.dto.UserDTO;
 import com.b1aboa.wedug.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,20 +25,28 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public String signUp(@ModelAttribute UserDTO userDTO, BindingResult bindingResult) {
+    public String signUp(@Valid @ModelAttribute UserDTO userDTO, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "user/user-signup";
+        }
 
-        if(bindingResult.hasErrors()){
+        if (!userDTO.getPassword().equals(userDTO.getConfirmPassword())) {
+            bindingResult.rejectValue("confirmPassword", "error.userDTO", "비밀번호와 비밀번호 확인이 일치하지 않습니다.");
             return "user/user-signup";
         }
-        if(!userDTO.getPassword().equals(userDTO.getConfirmPassword())){
-            System.out.println("비밀번호 불일치");
+
+        try {
+            if (userService.createUser(userDTO)) {
+                return "redirect:/";
+            } else {
+                bindingResult.rejectValue("userId", "error.userDTO", "사용자 생성에 실패했습니다.");
+                return "user/user-signup";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            bindingResult.reject("error.userDTO", "회원가입 중 오류가 발생했습니다.");
             return "user/user-signup";
         }
-        //userService.create(userDTO.getUserId(),userDTO.getNickname(),userDTO.getPassword(),userDTO.getGender(),userDTO.getBirthYear(),userDTO.getCountry());
-        if(userService.createUser(userDTO)){
-            System.out.println("회원가입 축하뽀카");
-        };
-        return "redirect:/";
     }
 
     @PostMapping("/find-password")

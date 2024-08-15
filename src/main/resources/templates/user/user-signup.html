@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="include/head-meta-fragment :: head-mata"></th:block>
 <body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script th:inline="javascript">
         window.onload = function() {
             axios.get('/json/nation-code.json')
@@ -22,25 +23,54 @@
                 });
         }
 
-        function checkDuplicateId() {
-            const userIdInput = document.getElementById('userId');
-            const userId = userIdInput.value;
-            const message = document.getElementById('duplicateMessage');
+function checkDuplicateId() {
+    const userIdInput = document.getElementById('userId');
+    const userId = userIdInput.value.trim();
+    const message = document.getElementById('duplicateMessage');
 
-            if (userId.trim().length > 0) {
-                // 중복 확인 로직
+<!--    if (userId.length > 0) {-->
+<!--        axios.get('/api/users/check-duplicate-id', { params: { userId } })-->
+<!--            .then(response => {-->
+<!--                if (response.data.duplicate) {-->
+<!--                    message.textContent = '이미 사용 중인 아이디입니다.';-->
+<!--                    message.style.color = 'red';-->
+<!--                } else {-->
+<!--                    message.textContent = '사용 가능한 아이디입니다.';-->
+<!--                    message.style.color = 'green';-->
+<!--                }-->
+<!--            })-->
+<!--            .catch(error => {-->
+<!--                console.error('Error checking ID:', error);-->
+<!--                message.textContent = '중복 확인에 실패했습니다.';-->
+<!--                message.style.color = 'red';-->
+<!--            });-->
+<!--    } else {-->
+<!--        message.textContent = '';-->
+<!--    }-->
+}
 
-                if (userId === 'testUser') {
-                    message.textContent = '이미 사용 중인 아이디입니다.';
-                    message.style.color = 'red';
-                } else {
-                    message.textContent = '사용 가능한 아이디입니다.';
-                    message.style.color = 'green';
-                }
-            } else {
-                message.textContent = '';
-            }
-        }
+        function validateForm(event) {
+    const userId = document.getElementById('userId').value.trim();
+    const nickname = document.getElementById('nickname').value.trim();
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+
+    if (userId === "" || nickname === "" || password === "" || confirmPassword === "") {
+        alert("모든 필드를 입력해주세요.");
+        event.preventDefault();
+        return false;
+    }
+
+    if (password !== confirmPassword) {
+        alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+        event.preventDefault();
+        return false;
+    }
+
+    return true;
+}
+
+
     </script>
     <th:block th:replace="include/header-fragment :: header"></th:block>
     <main class="main-flex">

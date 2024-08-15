@@ -2,10 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="include/head-meta-fragment :: head-mata"></th:block>
 <body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script th:inline="javascript">
-
-</script>
-<script>
     document.addEventListener('DOMContentLoaded', function() {
         document.querySelector('.login-form').addEventListener('submit', function(event) {
             event.preventDefault(); // 기본 폼 제출 방지
@@ -15,34 +13,25 @@
             const urlEncodedData = new URLSearchParams(formData).toString();
 
             // JSON 형태로 데이터 전송
-            fetch('/auth/login', {
-                method: 'POST',
+            axios.post('/api/auth/login',  urlEncodedData, {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
-                body: urlEncodedData,
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json(); // JSON 응답으로 파싱
-                })
-                .then(data => {
-                    if (data.token) {
-                        // 성공적으로 로그인 시 로컬 스토리지에 토큰 저장
-                        localStorage.setItem('authToken', data.token);
-                        // 로그인 후 페이지 이동 등 추가 작업 가능
-                        console.log('로그인 성공, 토큰:', data.token);
-                        window.location.href = '/'; // 성공 후 리다이렉션
-                    } else {
-                        // 로그인 실패 시 처리
-                        console.error('로그인 실패');
-                    }
-                })
-                .catch(error => {
-                    console.error('오류 발생:', error);
-                });
+            }).then(response => {
+                const data = response.data; // JSON 응답 데이터 접근
+                if (data.token) {
+                    // 성공적으로 로그인 시 로컬 스토리지에 토큰 저장
+                    localStorage.setItem('authToken', data.token);
+                    console.log('로그인 성공, 토큰:', data.token);
+                    window.location.href = '/'; // 성공 후 리다이렉션
+                } else {
+                    // 로그인 실패 시 UI에 피드백 제공
+                    alert('로그인에 실패했습니다. 사용자 ID 또는 비밀번호를 확인해주세요.');
+                }
+            }).catch(error => {
+                console.error('오류 발생:', error);
+                alert('서버 오류가 발생했습니다. 나중에 다시 시도해주세요.');
+            });
         });
     });
 </script>
@@ -50,7 +39,7 @@
 <main class="main-flex">
     <div class="login-container">
         <h2>로그인</h2>
-        <form th:action="@{/auth/login}" method="post" class="login-form">
+        <form th:action="@{/api/auth/login}" method="post" class="login-form">
             <div th:if="${param.error}">
                 <div class="alert alert-danger">
                     사용자 ID 또는 비밀번호를 확인해주세요.
@@ -76,6 +65,5 @@
 </main>
 <th:block th:replace="include/navbar-fragment :: navbar"></th:block>
 <th:block th:replace="include/footer-fragment :: footer"></th:block>
-
 </body>
 </html>

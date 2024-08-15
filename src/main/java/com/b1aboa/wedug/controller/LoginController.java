@@ -2,20 +2,17 @@ package com.b1aboa.wedug.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/user")
 public class LoginController {
 
-    @PostMapping("/login")
-    public String login() {
-        return "redirect:/";
-    }
+//    @GetMapping("/login")
+//    public String login() {
+//        return "/login";
+//    }
 
     @GetMapping("/logout")
     public String logout() {
