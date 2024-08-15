@@ -6,5 +6,4 @@ import com.b1aboa.wedug.dto.UserDTO;
 public interface UserService {
     public boolean createUser(UserDTO userDTO);
 
-
 }

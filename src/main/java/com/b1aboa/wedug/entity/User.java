@@ -1,11 +1,18 @@
 package com.b1aboa.wedug.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.Collections;
 
 
 @NoArgsConstructor
@@ -16,7 +23,7 @@ import lombok.ToString;
 
 @Table(name="wedug_user")
 @Entity
-public class User {
+public class User{
 	
 	@Id
 	@Column(length=20)
@@ -37,5 +44,4 @@ public class User {
 	@ManyToOne
 	@JoinColumn(name = "nation_code")
 	private NationInfo nationCode;
-	
 }

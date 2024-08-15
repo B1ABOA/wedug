@@ -12,7 +12,6 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-
 public class UserDTO {
 	private String userId;
 	private String nickname;
@@ -21,5 +20,4 @@ public class UserDTO {
 	private char gender;
 	private int birthYear;
 	private long nationCode;
-
 }
