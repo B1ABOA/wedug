@@ -1,7 +1,6 @@
 # WEDUG: 덕후들을 위한 Ultimate 여행 가이드
 
-![mole-game](https://github.com/user-attachments/assets/b91189a9-4308-4bbb-8c95-87a5cd2c147b)
-
+<img src="https://github.com/user-attachments/assets/b91189a9-4308-4bbb-8c95-87a5cd2c147b" alt="mole-game" style="width:8%;">
 
 ## 👥 팀원 소개
 
@@ -12,7 +11,7 @@
 
 ## 📌 프로젝트 개요
 
-WEDUG은 덕후들을 위한 특별한 여행 플랫폼입니다. TV 속 영화와 드라마의 촬영지, 연예인들의 핫플레이스, 맛집, 명소 등을 한눈에 볼 수 있습니다. Elasticsearch와 Kibana를 활용한 강력한 검색 및 시각화 기능으로 최신 트렌드와 정보를 제공합니다.
+WEDUG는 덕후들을 위한 특별한 여행 플랫폼입니다. TV 속 영화와 드라마의 촬영지, 연예인들의 핫플레이스, 맛집, 명소 등을 한눈에 볼 수 있습니다.<br> Elasticsearch와 Kibana를 활용한 강력한 검색 및 시각화 기능으로 최신 트렌드와 정보를 제공합니다.
 
 - **개발기간**: 2024.08.13 ~ 2024.08.16
 - **팀 노션**: [링크](https://hong0.notion.site/56e40339397c4a7bae282520e2f976c6)
@@ -20,15 +19,17 @@ WEDUG은 덕후들을 위한 특별한 여행 플랫폼입니다. TV 속 영화�
 ## 🛠 개발환경
 
 ### Front-end
-- 언어: ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
-- 프레임워크: ![Thymeleaf](https://img.shields.io/badge/Thymeleaf-%23005C0F.svg?style=for-the-badge&logo=Thymeleaf&logoColor=white)
-- API: ![카카오 주소 API](https://img.shields.io/badge/카카오%20주소%20API-FFCD00?style=flat-square&logo=KAKAO&logoColor=black) ![카카오 지도 API](https://img.shields.io/badge/카카오%20지도%20API-FFCD00?style=flat-square&logo=KAKAO&logoColor=black)
+- 언어: ![JavaScript](https://img.shields.io/badge/JavaScript-%23323330.svg?style=flat&logo=javascript&logoColor=%23F7DF1E)
+- 프레임워크: ![Thymeleaf](https://img.shields.io/badge/Thymeleaf-%23005C0F.svg?style=flat&logo=Thymeleaf&logoColor=white)
+- API: ![KakaoMap API](https://img.shields.io/badge/KakaoMap%20API-FFCD00?style=flat&logo=KAKAO&logoColor=black)
 
 ### Back-end
-- 언어: ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
-- 프레임워크: ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-6DB33F?style=flat&logo=Spring%20Boot&logoColor=white) ![Spring Security](https://img.shields.io/badge/Spring%20Security-6DB33F?style=flat&logo=Spring%20Security&logoColor=white)
-- 서버: ![Apache Tomcat](https://img.shields.io/badge/APACHE%20TOMCAT-F8DC75?style=flat-square&logo=apachetomcat&logoColor=black)
-- 데이터베이스: ![Oracle](https://img.shields.io/badge/Oracle-F80000?style=for-the-badge&logo=oracle&logoColor=white)
+- 언어: ![Java](https://img.shields.io/badge/Java-%23ED8B00.svg?style=flat&logo=openjdk&logoColor=white)
+- 프레임워크: ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-6DB33F?style=flat&logo=Spring%20Boot&logoColor=white) 
+- 서버: ![Apache Tomcat](https://img.shields.io/badge/APACHE%20TOMCAT-F8DC75?style=flat&logo=apachetomcat&logoColor=black)
+- 데이터베이스: ![Oracle](https://img.shields.io/badge/Oracle-F80000?style=flat&logo=oracle&logoColor=white)
+
+<img width="600" alt="스크린샷 2024-08-16 오후 3 01 00" src="https://github.com/user-attachments/assets/7e4fb35d-261c-4601-a31f-f88cf0934c79">
 
 ## 📦 주요 기능
 
@@ -56,7 +57,7 @@ WEDUG은 덕후들을 위한 특별한 여행 플랫폼입니다. TV 속 영화�
 
 ## 🗺 ERD
 
-(ERD 이미지 또는 링크 추가)
+<img src="https://github.com/user-attachments/assets/75e82ceb-eccc-4dbc-b74c-d362eb664e50" style="width:80%;">
 
 ## 🖼 화면 구성
 
