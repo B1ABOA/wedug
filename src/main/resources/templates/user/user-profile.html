@@ -53,6 +53,40 @@
             .catch(error => {
                 console.error('Error loading user info:', error);
             });
+
+    }
+    function updateUser(event) {
+        event.preventDefault(); // 폼의 기본 제출 동작 방지
+
+        const token = localStorage.getItem('authToken');
+        if (!token) {
+            console.error('토큰이 없습니다.');
+            return;
+        }
+
+        const userUpdateDto = {
+            userId: document.getElementById('userId').value,
+            nickname: document.getElementById('nickname').value,
+            gender: document.getElementById('gender').value,
+            birthYear: document.getElementById('birthYear').value,
+            nationCode: document.getElementById('country').value,
+        };
+
+        axios.post('/user/update', JSON.stringify(userUpdateDto), {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }
+        })
+            .then(response => {
+                // const newToken = response.data.token;
+                // localStorage.setItem('authToken', newToken);  // 새로운 토큰 저장
+                alert('사용자 정보가 성공적으로 업데이트되었습니다.');
+                window.location.href = '/';  // 홈으로 리s다이렉트
+            })
+            .catch(error => {
+                console.error('사용자 정보 업데이트 중 오류 발생:', error);
+            });
     }
 </script>
 <th:block th:replace="include/header-fragment :: header"></th:block>
@@ -91,7 +125,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <button type="submit" class="login-button">수정하기</button>
+                <button type="submit" class="login-button" >수정하기</button>
             </div>
         </form>
     </div>

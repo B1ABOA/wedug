@@ -68,16 +68,16 @@ public class UserController {
     }
 
     @PostMapping("/update")
-    public ResponseEntity<String> updateUserInfo(@RequestBody UserDTO userUpdateDto) {
+    public ResponseEntity<String> updateUserInfo(@ModelAttribute UserDTO userUpdateDto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String userId = authentication.getName();  // 현재 인증된 사용자 ID를 가져옴
+        String userId = authentication.getName();
 
         UserDTO userDto = userService.getUserInfo(userId);
         if (userDto == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
         }
 
-        // 기존 사용자 정보 업데이트
+        userDto.setUserId(userUpdateDto.getUserId());
         userDto.setNickname(userUpdateDto.getNickname());
         userDto.setGender(userUpdateDto.getGender());
         userDto.setBirthYear(userUpdateDto.getBirthYear());
