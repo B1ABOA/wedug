@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import com.b1aboa.wedug.dto.FavoriteDTO;
 import com.b1aboa.wedug.entity.Favorite;
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,7 @@ public class FavoriteServiceImpl implements FavoriteService {
     }
 
     @Override
+    @Transactional
     public int deleteUserFavorite(String userId, long placeId) {
         return favoriteRepository.deleteUserFavorite(userId, placeId);
     }
@@ -49,6 +51,7 @@ public class FavoriteServiceImpl implements FavoriteService {
     }
 
     @Override
+    @Transactional
     public int addUserFavorite(String userId, long placeId) {
         return favoriteRepository.addUserFavorite(userId, placeId);
     }

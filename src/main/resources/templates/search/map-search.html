@@ -405,7 +405,7 @@
     function isUserFavorite(place) {
         const placeId = place.filmId;
         const requestUrl = `http://localhost:80/api/favorites/check/${userId}/${placeId}`;
-        alert(requestUrl)
+
         axios.get(requestUrl)
             .then(response => {
                 const result = response.data;
