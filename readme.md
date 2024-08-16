@@ -1,6 +1,7 @@
 # WEDUG: 덕후들을 위한 Ultimate 여행 가이드
 
-![WEDUG 로고](../../../Downloads/mole-game.png)
+![mole-game](https://github.com/user-attachments/assets/b91189a9-4308-4bbb-8c95-87a5cd2c147b)
+
 
 ## 👥 팀원 소개
 
@@ -61,12 +62,13 @@ WEDUG은 덕후들을 위한 특별한 여행 플랫폼입니다. TV 속 영화�
 
 | 메인 | 로그인 & 회원가입 |
 |:---:|:---:|
-| ![메인 화면](../../1.png) | ![로그인/회원가입](../../2.png) |
+| <img width="489" alt="1" src="https://github.com/user-attachments/assets/87788db7-9270-416b-8ca3-fcd4b58201e1"> | <img width="489" alt="2" src="https://github.com/user-attachments/assets/f340b625-df42-4be6-8e29-cc442f7c4f4f">|
 
 | 장소 찾기 | 세부 장소 정보 |
 |:---:|:---:|
-| ![장소 찾기](../../3.png) | ![세부 장소 정보](../../4.png) |
+| <img width="494" alt="3" src="https://github.com/user-attachments/assets/1a5daecb-ffd1-4131-86bf-4a25b11788ef">| <img width="495" alt="4" src="https://github.com/user-attachments/assets/d5723ba8-cbbb-44dc-bec7-9e003e21a552">|
 
 |                              장소 즐겨찾기                              | 회원 정보 수정 |
 |:-----------------------------------------------------------------:|:---:|
-| ![장소 즐겨찾기](/src/main/resources/static/images/readme/image(1).png) | ![회원 정보 수정](../../../Downloads/mypage.png) |
+| <img width="489" src="https://github.com/user-attachments/assets/5702ed33-f26e-4d0e-903a-dc3bd81e4c93"> |  <img width="489" src ="https://github.com/user-attachments/assets/22e03e98-56ff-443d-bff0-bc767b7ae9b9">|
+
