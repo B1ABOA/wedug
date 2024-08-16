@@ -85,7 +85,6 @@
             console.error('No token found');
             return;
         }
-        console.log("********" + token);
         axios.get('/user/info', {
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -138,6 +137,23 @@
                 console.error('사용자 정보 업데이트 중 오류 발생:', error);
             });
     }
+
+    function logoutUser(event) {
+        event.preventDefault(); // 폼의 기본 제출 동작 방지
+
+        localStorage.removeItem('authToken');
+        axios.get('/user/logout')
+            .then(response => {
+                alert('로그아웃 성공.');
+                console.log('로그아웃 성공:', response.data);
+                window.location.href = '/';
+            })
+            .catch(error => {
+                console.error('로그아웃 중 오류 발생:', error);
+                // 오류 처리
+            });
+    }
+
 </script>
 <th:block th:replace="include/header-fragment :: header"></th:block>
 <main class="main-flex">
@@ -173,6 +189,9 @@
             </div>
             <div class="form-group">
                 <button type="button" class="login-button" onclick="updateUser(event)">수정하기</button>
+            </div>
+            <div class="form-group">
+                <button type="button" class="login-button" onclick="logoutUser(event)">로그아웃</button>
             </div>
         </form>
     </div>
