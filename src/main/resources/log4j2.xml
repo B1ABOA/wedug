@@ -6,7 +6,8 @@
         <property name="LOGS_PATH">${sys:user.home}/myapp/logs</property>
         <Property name="LOG_TXT_PATTERN">[%-5level] %d{yyyy-MM-dd HH:mm:ss} [%t] %c{1} - %msg%n</Property>
         <Property name="LOG_JSON_PATTERN">{"timestamp": "%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX}", "level": "%level", "logger": "%logger{1}", "thread": "%thread", "message": %message},</Property>
-        <Property name="FILE_NAME">user-place-search</Property>
+        <Property name="FILE_NAME1">user-place-search</Property>
+        <Property name="FILE_NAME2">user-favorites</Property>
     </Properties>
 
     <Appenders>
@@ -14,11 +15,36 @@
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%highlight{%-5p}] %style{%c{1}:%L}{blue} - %m%n"/>
         </Console>
 
-        <RollingFile name="FilterLogger" append="true">
+        <RollingFile name="FilterUserPlaceSearchLogger" append="true">
              <!-- 현재의 활성 로그 파일의-->
-            <FileName>${LOGS_PATH}/${FILE_NAME}.json</FileName>
+            <FileName>${LOGS_PATH}/${FILE_NAME1}.json</FileName>
              <!-- 롤링이 발생할 때 새로 생성되는 로그 파일-->
-            <FilePattern>${LOGS_PATH}/${FILE_NAME}-%d{yyyy-MM-dd}.json.gz</FilePattern>
+            <FilePattern>${LOGS_PATH}/${FILE_NAME1}-%d{yyyy-MM-dd}.json.gz</FilePattern>
+            <PatternLayout pattern="${LOG_JSON_PATTERN}"/>
+            <!--compact: 키 사이에 공백이나 줄바꿈을 쓰지 않고 JSON 로그를 작성-->
+            <!--eventEol:각 레코드 뒤에 줄 끝 문자( \n)를 추가-->
+            <!--includeTimeMillis: imeMillis라는 필드가 추가되며 로그 이벤트가 발생한 시간을 밀리초 단위로 기록-->
+            <JSONLayout compact="true" eventEol="true" properties="true" includeTimeMillis="true">
+                <KeyValuePair key="appName" value="wedug-app" />
+            </JSONLayout>
+            <Policies>
+                <!-- FilePattern의 {yyyy-MM-dd} + interval="1" => 하루마다 새로운 로그 파일이 생성 -->
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="10MB"/>
+            </Policies>
+            <!-- 최대 31개의 파일을 유지하도록 설정 -->
+            <DefaultRolloverStrategy max="31">
+                <Delete basePath="${LOGS_PATH}" maxDepth="1">
+                    <!--총 파일 수가 31개 초과 할 경우 오래된 파일 삭제 됨-->
+                    <IfAccumulatedFileCount exceeds="31"/>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+        <RollingFile name="FilterUserFavoritesLogger" append="true">
+            <!-- 현재의 활성 로그 파일의-->
+            <FileName>${LOGS_PATH}/${FILE_NAME2}.json</FileName>
+            <!-- 롤링이 발생할 때 새로 생성되는 로그 파일-->
+            <FilePattern>${LOGS_PATH}/${FILE_NAME2}-%d{yyyy-MM-dd}.json.gz</FilePattern>
             <PatternLayout pattern="${LOG_JSON_PATTERN}"/>
             <!--compact: 키 사이에 공백이나 줄바꿈을 쓰지 않고 JSON 로그를 작성-->
             <!--eventEol:각 레코드 뒤에 줄 끝 문자( \n)를 추가-->
@@ -44,7 +70,10 @@
     <Loggers>
         <!-- UserPlaceSearchLoggingFilter 클래스의 로그를 별도로 설정 -->
         <Logger name="com.b1aboa.wedug.filters.UserPlaceSearchLoggingFilter" level="info" additivity="true">
-            <AppenderRef ref="FilterLogger"/>
+            <AppenderRef ref="FilterUserPlaceSearchLogger"/>
+        </Logger>
+        <Logger name="com.b1aboa.wedug.filters.UserFavoritesLoggingFilter" level="info" additivity="true">
+            <AppenderRef ref="FilterUserFavoritesLogger"/>
         </Logger>
 
         <!-- 루트 로거(모든 로그 메세지 기본 정의) 설정 -->
