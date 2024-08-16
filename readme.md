@@ -27,7 +27,7 @@ WEDUG는 덕후들을 위한 특별한 여행 플랫폼입니다. TV 속 영화�
 - 서버: ![Apache Tomcat](https://img.shields.io/badge/APACHE%20TOMCAT-F8DC75?style=flat&logo=apachetomcat&logoColor=black)
 - 데이터베이스: ![Oracle](https://img.shields.io/badge/Oracle-F80000?style=flat&logo=oracle&logoColor=white)
 
-<img width="600" alt="스크린샷 2024-08-16 오후 3 01 00" src="https://github.com/user-attachments/assets/7e4fb35d-261c-4601-a31f-f88cf0934c79">
+<img width="600" alt="스크린샷 2024-08-16 오후 3 01 00" src="https://github.com/user-attachments/assets/11b31766-9f7e-4dc9-a510-44974c14f2ba">
 
 ## 📦 주요 기능
 
