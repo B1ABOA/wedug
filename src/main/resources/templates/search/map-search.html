@@ -50,14 +50,11 @@
         background-color: white;
         padding: 20px;
         border-radius: 10px;
-<<<<<<< Updated upstream
-        box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    < < < < < < < Updated upstream box-shadow: 0 4 px 20 px rgba(0, 0, 0, 0.15);
         z-index: 1001;
-=======
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    = = = = = = = box-shadow: 0 4 px 20 px rgba(0, 0, 0, 0.15);
         z-index: 1000;
->>>>>>> Stashed changes
-        width: 80%;
+    >>> >>> > Stashed changes width: 80 %;
         max-width: 500px;
     }
 
@@ -408,10 +405,9 @@
     }
 
     function isUserFavorite(place) {
-        const userId = 'joowon';
         const placeId = place.filmId;
         const requestUrl = `http://localhost:80/api/favorites/check/${userId}/${placeId}`;
-
+        alert(requestUrl)
         axios.get(requestUrl)
             .then(response => {
                 const result = response.data;
@@ -431,10 +427,9 @@
     }
 
     function updateFavoriteStatus(placeId) {
-        const userId = 'joowon';
         const requestUrl = `http://localhost:80/api/favorites/${userId}/places/${placeId}`;
         const favoriteIcon = document.getElementById('favoriteIcon');
-        
+
         if (favoriteIcon.src.includes("/images/icons/heart-filled.svg")) {
             axios.delete(requestUrl)
                 .then(response => {
@@ -469,6 +464,31 @@
                 });
         }
     }
+
+    let userId = null;
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const token = localStorage.getItem('authToken');
+        if (!token) {
+            console.error('No token found');
+            return;
+        }
+        console.log("********" + token);
+        axios.get('/user/info', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+            .then(response => {
+                const user = response.data;
+                userId = user.userId;
+
+                fetchFavorites(userId);
+            })
+            .catch(error => {
+                console.error('Error loading user info:', error);
+            });
+    });
 </script>
 </body>
 </html>

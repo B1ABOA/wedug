@@ -12,21 +12,33 @@
 <th:block th:replace="include/footer-fragment :: footer"></th:block>
 
 <script th:inline="javascript">
+    let userId = null;
+
     document.addEventListener('DOMContentLoaded', function () {
-        fetchFavorites();
+        const token = localStorage.getItem('authToken');
+        if (!token) {
+            console.error('No token found');
+            return;
+        }
+        console.log("********" + token);
+        axios.get('/user/info', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+            .then(response => {
+                const user = response.data;
+                userId = user.userId;
+
+                fetchFavorites(userId);
+            })
+            .catch(error => {
+                console.error('Error loading user info:', error);
+            });
     });
 
-    function fetchFavorites() {
-        const token = localStorage.getItem('authToken'); // 로컬 스토리지에서 토큰 가져오기
-
-        alert(token);
-
-        // const userId = parseJwt(token); // JWT에서 userId 추출
-        // alert(userId);
-        const userId = 'joowon'
+    function fetchFavorites(userId) {
         const requestUrl = `/api/favorites/${userId}`;
-
-        alert(requestUrl)
 
         fetch(requestUrl)
             .then(response => response.json())
