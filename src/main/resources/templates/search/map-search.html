@@ -142,7 +142,7 @@
     <div id="placeDetails" class="place-details" style="display: none;">
         <div class="place-header">
             <h3 id="placeTitle"></h3>
-            <button class="favorite-btn" onclick="updateFavoriteStatus('${place.filmId}')">
+            <button class="favorite-btn" onclick="updateFavoriteStatus('${place}')">
                 <img src="/images/icons/heart.svg" alt="Favorite" id="favoriteIcon">
             </button>
         </div>
@@ -307,7 +307,10 @@
         document.getElementById('placeClosedDay').textContent = '[Closed Days]: ' + (place.closedDay || 'No Information :(');
         document.getElementById('placeNumber').textContent = '[Number]: ' + (place.phoneNumber || 'No Information :(');
 
-        document.querySelector('.favorite-btn').setAttribute('onclick', `updateFavoriteStatus(${place.filmId})`);
+        const favoriteButton = document.querySelector('.favorite-btn');
+        favoriteButton.onclick = function() {
+            updateFavoriteStatus(place);
+        };
 
         <!--     const userId = localStorage.getItem('userId');-->
 
@@ -424,8 +427,8 @@
             });
     }
 
-    function updateFavoriteStatus(placeId) {
-        const requestUrl = `http://localhost:80/api/favorites/${userId}/places/${placeId}`;
+    function updateFavoriteStatus(place) {
+        let requestUrl = `http://localhost:80/api/favorites/places?userId=${userId}&placeId=${place.filmId}`;
         const favoriteIcon = document.getElementById('favoriteIcon');
 
         if (favoriteIcon.src.includes("/images/icons/heart-filled.svg")) {
@@ -445,6 +448,7 @@
                     console.error('Error:', error);
                 });
         } else {
+            requestUrl = `${requestUrl}&place=${place.place}`;
             axios.get(requestUrl)
                 .then(response => {
                     const result = response.data;

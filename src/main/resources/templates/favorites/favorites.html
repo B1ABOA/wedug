@@ -38,7 +38,7 @@
     });
 
     function fetchFavorites(userId) {
-        const requestUrl = `/api/favorites/${userId}`;
+        const requestUrl = `/api/favorites?userId=${userId}`;
 
         fetch(requestUrl)
             .then(response => response.json())
@@ -81,8 +81,7 @@
         const userConfirmed = confirm("즐겨찾기를 해제할까요?");
 
         if (userConfirmed) {
-            const userId = 'joowon';
-            const requestUrl = `http://localhost:80/api/favorites/${userId}/places/${placeId}`;
+            const requestUrl = `http://localhost:80/api/favorites/places?userId=${userId}&placeId=${placeId}`;
 
             axios.delete(requestUrl)
                 .then(response => {
@@ -90,7 +89,7 @@
 
                     if (result) {
                         alert("즐겨찾기가 해지되었습니다.");
-                        fetchFavorites();
+                        fetchFavorites(userId);
                     } else {
                         alert("즐겨찾기 취소에 실패했습니다.");
                     }

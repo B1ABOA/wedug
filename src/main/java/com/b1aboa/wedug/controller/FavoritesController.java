@@ -31,17 +31,20 @@ public class FavoritesController {
             @ApiResponse(responseCode = "404", description = "User not found"),
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
-    @GetMapping("/{userId}")
+
+    @GetMapping
     @ResponseBody
-    public List<FavoriteDTO> showFavoriteList(@PathVariable("userId") String userId) {
+    public List<FavoriteDTO> showFavoriteList(@RequestParam(value = "userId", required = true) String userId) {
         return favoriteService.showAllFavorites(userId);
     }
 
-    @DeleteMapping("/{userId}/places/{placeId}")
+    @DeleteMapping("/places")
     @ResponseBody
-    public boolean deleteUserFavorite(@PathVariable("userId") String userId, @PathVariable("placeId") long placeId) {
-        if (favoriteService.deleteUserFavorite(userId, placeId) > 0)
+    public boolean deleteUserFavorite(@RequestParam(value = "userId", required = true) String userId,
+                                      @RequestParam(value = "placeId", required = true) long placeId) {
+        if (favoriteService.deleteUserFavorite(userId, placeId) > 0) {
             return true;
+        }
         return false;
     }
 
@@ -53,9 +56,11 @@ public class FavoritesController {
         return false;
     }
 
-    @GetMapping("/{userId}/places/{placeId}")
+    @GetMapping("/places")
     @ResponseBody
-    public boolean addUserFavorite(@PathVariable("userId") String userId, @PathVariable("placeId") long placeId) {
+    public boolean addUserFavorite(@RequestParam(value = "userId", required = true) String userId,
+                                   @RequestParam(value = "placeId", required = true) long placeId) {
+        System.out.println("진입!!!");
         if (favoriteService.addUserFavorite(userId, placeId) > 0)
             return true;
         return false;

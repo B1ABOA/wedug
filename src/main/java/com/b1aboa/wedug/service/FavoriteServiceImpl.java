@@ -39,6 +39,7 @@ public class FavoriteServiceImpl implements FavoriteService {
     @Override
     @Transactional
     public int deleteUserFavorite(String userId, long placeId) {
+        //System.out.println(userId + "  " + placeId);
         return favoriteRepository.deleteUserFavorite(userId, placeId);
     }
 
