@@ -1,6 +1,7 @@
 package com.b1aboa.wedug.jwt;
 
 import io.jsonwebtoken.Jwts;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -8,7 +9,7 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
-
+@Slf4j
 @Component
 public class JWTUtil {
 
@@ -35,7 +36,7 @@ public class JWTUtil {
         return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().getExpiration().before(new Date());
     }
 
-    public String createJwt(String username, Long expiredMs) {
+    public String createJwt(String username, long expiredMs) {
 
         return Jwts.builder()
                 .claim("username", username)

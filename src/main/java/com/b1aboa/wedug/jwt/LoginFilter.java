@@ -50,9 +50,9 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         log.info("SUCCESS_AUTH START");
         CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
         String userId = customUserDetails.getUsername();
-
+        long expiredMs = 4L * 60 * 60 * 1000; // 4시간
         // Role 은 Refactoring 때 진행
-        String token = jwtUtil.createJwt(userId,60*60*10L);
+        String token = jwtUtil.createJwt(userId, expiredMs);
         //RFC 7235 정의에 따른 인증 헤더 형태 -> Authorization: Bearer 인증토큰 string
         // ** 주의 Bearer 뒤에 공백 하나 있어야 함.
         // jwt 토큰 헤더에 추가하여 반환
