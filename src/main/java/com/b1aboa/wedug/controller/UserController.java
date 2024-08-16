@@ -110,4 +110,9 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
+
+    @GetMapping("/logout")
+    public ResponseEntity<String> logout() {
+        return ResponseEntity.ok("Logout Success");
+    }
 }
