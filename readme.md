@@ -1,6 +1,4 @@
-# WEDUG: 덕후들을 위한 Ultimate 여행 가이드
-
-<img src="https://github.com/user-attachments/assets/b91189a9-4308-4bbb-8c95-87a5cd2c147b" alt="mole-game" style="width:8%;">
+# WEDUG: 덕후들을 위한 Ultimate 여행 가이드 <img src="https://github.com/user-attachments/assets/b91189a9-4308-4bbb-8c95-87a5cd2c147b" alt="mole-game" style="width:5%;">
 
 ## 👥 팀원 소개
 
