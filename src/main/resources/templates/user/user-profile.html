@@ -1,27 +1,76 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="include/head-meta-fragment :: head-mata"></th:block>
+<head>
+    <style>
+        .signup-container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .login-button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .login-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
 <body>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script th:inline="javascript">
-    window.onload = function() {
-        // 국가 코드 로딩
-        loadCountries();
+    function populateBirthYears() {
+        const currentYear = new Date().getFullYear();
+        const birthYearSelect = document.getElementById('birthYear');
+        for (let year = currentYear; year >= 1900; year--) {
+            const option = document.createElement('option');
+            option.value = year;
+            option.textContent = year;
+            birthYearSelect.appendChild(option);
+        }
+    }
 
-        // 사용자 정보 로딩
+    window.onload = function() {
+        loadCountries();
         loadUserInfo();
+        populateBirthYears();  // 이 줄을 추가합니다
     }
 
     function loadCountries() {
-        axios.get('/json/nation-code.json')
+        axios.get('/api/nation-code')
             .then(response => {
                 const countries = response.data;
                 const selectElement = document.getElementById('country');
 
                 countries.forEach(country => {
                     const option = document.createElement('option');
-                    option.value = country.NATION_CODE;
-                    option.textContent = country.KO_NAME;
+                    option.value = country.nationCode;
+                    option.textContent = country.koName;
                     selectElement.appendChild(option);
                 });
             })
@@ -48,54 +97,87 @@
                 document.getElementById('nickname').value = user.nickname;
                 document.getElementById('gender').value = user.gender;
                 document.getElementById('birthYear').value = user.birthYear;
-                document.getElementById('country').value = user.country;
+                // document.getElementById('country').value = user.country;
             })
             .catch(error => {
                 console.error('Error loading user info:', error);
             });
+
+    }
+    function updateUser(event) {
+        event.preventDefault(); // 폼의 기본 제출 동작 방지
+
+        const token = localStorage.getItem('authToken');
+        if (!token) {
+            console.error('토큰이 없습니다.');
+            return;
+        }
+
+        const userUpdateDto = {
+            userId: document.getElementById('userId').value,
+            nickname: document.getElementById('nickname').value,
+            gender: document.getElementById('gender').value,
+            birthYear: document.getElementById('birthYear').value,
+            // nationCode: document.getElementById('country').value,
+        };
+        console.log(userUpdateDto);
+
+        axios.post('/user/update', userUpdateDto, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }
+        })
+            .then(response => {
+                // const newToken = response.data.token;
+                // localStorage.setItem('authToken', newToken);  // 새로운 토큰 저장
+                alert('사용자 정보가 성공적으로 업데이트되었습니다.');
+                window.location.href = '/';  // 홈으로 리s다이렉트
+            })
+            .catch(error => {
+                console.error('사용자 정보 업데이트 중 오류 발생:', error);
+            });
     }
 </script>
-    <th:block th:replace="include/header-fragment :: header"></th:block>
-    <main class="main-flex">
-        <div class="signup-container">
-            <h2>마이페이지</h2>
-            <form th:action="@{/user/signup}" method="post" class="login-form">
-                <div class="form-group">
-                    <label for="userId">아이디</label>
-                    <input type="text" id="userId" name="userId" readonly>
-                    <div id="duplicateMessage"></div>
-                </div>
-                <div class="form-group">
-                    <label for="nickname">닉네임</label>
-                    <input type="text" id="nickname" name="nickname">
-                </div>
-                <div class="form-group">
-                    <label for="gender">성별</label>
-                    <select id="gender" name="gender">
-                        <option value="M">남성</option>
-                        <option value="F">여성</option>
-                        <option value="O">기타</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="birthYear">태어난 년도</label>
-                    <select id="birthYear" name="birthYear">
-                        <option value="1990">1990</option>
-                        <option value="1991">1991</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="country">국가</label>
-                    <select id="country" name="country">
-                    </select>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="login-button">수정하기</button>
-                </div>
-            </form>
-        </div>
-    </main>
-    <th:block th:replace="include/navbar-fragment :: navbar"></th:block>
-    <th:block th:replace="include/footer-fragment :: footer"></th:block>
+<th:block th:replace="include/header-fragment :: header"></th:block>
+<main class="main-flex">
+    <div class="signup-container">
+        <h2>마이페이지</h2>
+        <form onsubmit="updateUser(event)" class="login-form">
+            <div class="form-group">
+                <label for="userId">아이디</label>
+                <input type="text" id="userId" name="userId" readonly>
+                <div id="duplicateMessage"></div>
+            </div>
+            <div class="form-group">
+                <label for="nickname">닉네임</label>
+                <input type="text" id="nickname" name="nickname">
+            </div>
+            <div class="form-group">
+                <label for="gender">성별</label>
+                <select id="gender" name="gender">
+                    <option value="M">남성</option>
+                    <option value="F">여성</option>
+                    <option value="O">기타</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="birthYear">태어난 년도</label>
+                <select id="birthYear" name="birthYear">
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="country">국가</label>
+                <select id="country" name="country">
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="button" class="login-button" onclick="updateUser(event)">수정하기</button>
+            </div>
+        </form>
+    </div>
+</main>
+<th:block th:replace="include/navbar-fragment :: navbar"></th:block>
+<th:block th:replace="include/footer-fragment :: footer"></th:block>
 </body>
 </html>

@@ -6,7 +6,6 @@ import com.b1aboa.wedug.entity.User;
 import com.b1aboa.wedug.repository.NationInfoRepository;
 import com.b1aboa.wedug.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -48,6 +47,30 @@ public class UserServiceImpl implements  UserService{
     public UserDTO getUserInfo(String userId) {
         User user = userRepository.findByUserId(userId);
         return modelMapper.map(user, UserDTO.class);
+    }
+
+    @Override
+    public void updateUser(UserDTO userDto) {
+        User existingUser = userRepository.findByUserId(userDto.getUserId());
+        if (existingUser == null) {
+            throw new RuntimeException("User not found");
+        }
+
+        existingUser.setNickname(userDto.getNickname());
+        existingUser.setGender(userDto.getGender());
+        existingUser.setBirthYear(userDto.getBirthYear());
+//
+//        if (userDto.getNationCode() != null) {
+//            NationInfo nationInfo = nationInfoRepository.getReferenceById(userDto.getNationCode());
+//            existingUser.setNationCode(nationInfo);
+//        }
+
+        // 비밀번호 변경이 필요한 경우 (옵션)
+        // if (userDto.getPassword() != null && !userDto.getPassword().isEmpty()) {
+        //     existingUser.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        // }
+
+        userRepository.save(existingUser);
     }
 
 
