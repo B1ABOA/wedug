@@ -51,8 +51,26 @@ public class UserServiceImpl implements  UserService{
 
     @Override
     public void updateUser(UserDTO userDto) {
-        User user = modelMapper.map(userDto, User.class);
-        userRepository.save(user);
+        User existingUser = userRepository.findByUserId(userDto.getUserId());
+        if (existingUser == null) {
+            throw new RuntimeException("User not found");
+        }
+
+        existingUser.setNickname(userDto.getNickname());
+        existingUser.setGender(userDto.getGender());
+        existingUser.setBirthYear(userDto.getBirthYear());
+//
+//        if (userDto.getNationCode() != null) {
+//            NationInfo nationInfo = nationInfoRepository.getReferenceById(userDto.getNationCode());
+//            existingUser.setNationCode(nationInfo);
+//        }
+
+        // 비밀번호 변경이 필요한 경우 (옵션)
+        // if (userDto.getPassword() != null && !userDto.getPassword().isEmpty()) {
+        //     existingUser.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        // }
+
+        userRepository.save(existingUser);
     }
 
 

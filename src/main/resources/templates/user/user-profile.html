@@ -17,7 +17,7 @@
             .then(response => {
                 const countries = response.data;
                 const selectElement = document.getElementById('country');
-                console.log('**** ddsddsdsd'+countries);
+
                 countries.forEach(country => {
                     const option = document.createElement('option');
                     option.value = country.nationCode;
@@ -69,10 +69,11 @@
             nickname: document.getElementById('nickname').value,
             gender: document.getElementById('gender').value,
             birthYear: document.getElementById('birthYear').value,
-            nationCode: document.getElementById('country').value,
+            // nationCode: document.getElementById('country').value,
         };
+        console.log(userUpdateDto);
 
-        axios.post('/user/update', JSON.stringify(userUpdateDto), {
+        axios.post('/user/update', userUpdateDto, {
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json',
@@ -90,11 +91,10 @@
     }
 </script>
 <th:block th:replace="include/header-fragment :: header"></th:block>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <main class="main-flex">
     <div class="signup-container">
         <h2>마이페이지</h2>
-        <form th:action="@{/user/update}" method="post" class="login-form">
+        <form onsubmit="updateUser(event)" class="login-form">
             <div class="form-group">
                 <label for="userId">아이디</label>
                 <input type="text" id="userId" name="userId" readonly>
@@ -115,8 +115,6 @@
             <div class="form-group">
                 <label for="birthYear">태어난 년도</label>
                 <select id="birthYear" name="birthYear">
-                    <option value="1990">1990</option>
-                    <option value="1991">1991</option>
                 </select>
             </div>
             <div class="form-group">
@@ -125,7 +123,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <button type="submit" class="login-button" >수정하기</button>
+                <button type="button" class="login-button" onclick="updateUser(event)">수정하기</button>
             </div>
         </form>
     </div>
