@@ -12,4 +12,10 @@ public interface FavoriteService {
 
     // 즐겨찾기 해제
     int deleteUserFavorite(String userId, long placeId);
+
+    // 즐겨찾기에 존재하는지 확인
+    boolean isUserFavorite(String userId, long placeId);
+
+    // 즐겨찾기 추가
+    int addUserFavorite(String userId, long placeId);
 }

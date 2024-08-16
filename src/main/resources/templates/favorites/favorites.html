@@ -12,12 +12,32 @@
 <th:block th:replace="include/footer-fragment :: footer"></th:block>
 
 <script th:inline="javascript">
+    let userId = null;
+
     document.addEventListener('DOMContentLoaded', function () {
-        fetchFavorites();
+        const token = localStorage.getItem('authToken');
+        if (!token) {
+            console.error('No token found');
+            return;
+        }
+        console.log("********" + token);
+        axios.get('/user/info', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+            .then(response => {
+                const user = response.data;
+                userId = user.userId;
+
+                fetchFavorites(userId);
+            })
+            .catch(error => {
+                console.error('Error loading user info:', error);
+            });
     });
 
-    function fetchFavorites() {
-        const userId = 'joowon';
+    function fetchFavorites(userId) {
         const requestUrl = `/api/favorites/${userId}`;
 
         fetch(requestUrl)
@@ -29,7 +49,6 @@
                     console.log(data)
                     updateFavoriteList(data);
                 }
-                console.log("hihihi")
             })
             .catch(error => console.error('Error:', error));
     }
@@ -44,8 +63,8 @@
             favoriteItem.className = 'favorite-item';
 
             favoriteItem.innerHTML = `
-                   <div class="heart-icon" onclick="confirmCancelFavorite('${favorite.filmId}')">
-                        <img src="/images/icons/favorites.svg" alt="Heart Icon"/>
+                   <div class="heart-icon" onclick="deleteUserFavorite('${favorite.filmId}')">
+                        <img src="/images/icons/heart-filled.svg" alt="Heart Icon"/>
                     </div>
                     <div class="item-details">
                         <h3 class="item-title">${favorite.title}</h3>
@@ -58,7 +77,7 @@
         });
     }
 
-    function confirmCancelFavorite(placeId) {
+    function deleteUserFavorite(placeId) {
         const userConfirmed = confirm("즐겨찾기를 해제할까요?");
 
         if (userConfirmed) {

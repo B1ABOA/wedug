@@ -41,6 +41,7 @@
     .pagination-buttons button {
         margin: 0 5px;
     }
+
     .place-details {
         position: fixed;
         top: 50%;
@@ -49,7 +50,7 @@
         background-color: white;
         padding: 20px;
         border-radius: 10px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
         z-index: 1001;
         width: 80%;
         max-width: 500px;
@@ -132,7 +133,7 @@
             </div>
             <div class="search-box">
                 <input class="search-txt" type="text" name="keyword" placeholder="검색어를 입력하세요.">
-                <button class="search-button" type="submit" style="cursor:pointer;" >
+                <button class="search-button" type="submit" style="cursor:pointer;">
                     <img src="/images/icons/search.svg">
                 </button>
             </div>
@@ -141,7 +142,7 @@
     <div id="placeDetails" class="place-details" style="display: none;">
         <div class="place-header">
             <h3 id="placeTitle"></h3>
-            <button class="favorite-btn">
+            <button class="favorite-btn" onclick="updateFavoriteStatus('${place.filmId}')">
                 <img src="/images/icons/heart.svg" alt="Favorite" id="favoriteIcon">
             </button>
         </div>
@@ -163,10 +164,11 @@
     <div class="search-results">
         <ul id="placeList" class="place-list"></ul>
         <div class="pagination-buttons">
-            <div  id="prevButton" style="display: none; margin-right: 10px; cursor: pointer;" onclick="loadPreviousResults()">
+            <div id="prevButton" style="display: none; margin-right: 10px; cursor: pointer;"
+                 onclick="loadPreviousResults()">
                 <img src="/images/icons/previous.svg" alt="Prev Icon" class="nav-icon">
             </div>
-            <div  id="nextButton" style="display: none; cursor: pointer;" onclick="loadNextResults()">
+            <div id="nextButton" style="display: none; cursor: pointer;" onclick="loadNextResults()">
                 <img src="/images/icons/next.svg" alt="Prev Icon" class="nav-icon">
             </div>
         </div>
@@ -192,7 +194,7 @@
     }
 
     function initMap() {
-        kakao.maps.load(function() {
+        kakao.maps.load(function () {
             var mapContainer = document.getElementById('map');
             var mapOption = {
                 center: new kakao.maps.LatLng(33.450701, 126.570667),
@@ -214,8 +216,8 @@
         var dLat = toRad(lat2 - lat1);
         var dLon = toRad(lon2 - lon1);
         var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-                Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
-                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2);
         var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         return R * c; // 거리 (km)
     }
@@ -224,122 +226,125 @@
         return value * Math.PI / 180;
     }
 
-   function displaySearchResults(searchList) {
-    var bounds = new kakao.maps.LatLngBounds();
-    var listEl = document.getElementById('placeList');
-    listEl.innerHTML = '';
+    function displaySearchResults(searchList) {
+        var bounds = new kakao.maps.LatLngBounds();
+        var listEl = document.getElementById('placeList');
+        listEl.innerHTML = '';
 
-    if (searchList.length === 0) {
-        document.getElementById('noResultsMessage').style.display = 'block';
-        document.getElementById('prevButton').style.display = 'none';
-        document.getElementById('nextButton').style.display = 'none';
-        return;
-    }
+        if (searchList.length === 0) {
+            document.getElementById('noResultsMessage').style.display = 'block';
+            document.getElementById('prevButton').style.display = 'none';
+            document.getElementById('nextButton').style.display = 'none';
+            return;
+        }
 
-    document.getElementById('noResultsMessage').style.display = 'none';
+        document.getElementById('noResultsMessage').style.display = 'none';
 
-    // 현재 위치를 기준으로 거리 계산
-    navigator.geolocation.getCurrentPosition(function(position) {
-        var userLat = position.coords.latitude;
-        var userLon = position.coords.longitude;
+        // 현재 위치를 기준으로 거리 계산
+        navigator.geolocation.getCurrentPosition(function (position) {
+            var userLat = position.coords.latitude;
+            var userLon = position.coords.longitude;
 
-        var sortedPlaces = searchList.map(place => {
-            place.distance = calculateDistance(userLat, userLon, place.latitude, place.longitude);
-            return place;
-        }).sort((a, b) => a.distance - b.distance);
+            var sortedPlaces = searchList.map(place => {
+                place.distance = calculateDistance(userLat, userLon, place.latitude, place.longitude);
+                return place;
+            }).sort((a, b) => a.distance - b.distance);
 
-        // Paginate results
-        var paginatedResults = sortedPlaces.slice(currentPage * resultsPerPage, (currentPage + 1) * resultsPerPage);
-        paginatedResults.forEach(function(place) {
-            var placePosition = new kakao.maps.LatLng(place.latitude, place.longitude);
+            // Paginate results
+            var paginatedResults = sortedPlaces.slice(currentPage * resultsPerPage, (currentPage + 1) * resultsPerPage);
+            paginatedResults.forEach(function (place) {
+                var placePosition = new kakao.maps.LatLng(place.latitude, place.longitude);
 
-            // 마커 생성
-            var marker = new kakao.maps.Marker({
-                position: placePosition
+                // 마커 생성
+                var marker = new kakao.maps.Marker({
+                    position: placePosition
+                });
+                marker.setMap(map);
+
+                // 인포윈도우 생성
+                var infowindow = new kakao.maps.InfoWindow({
+                    content: '<div style="padding:5px;">' + place.place + '</div>'
+                });
+
+                kakao.maps.event.addListener(marker, 'mouseover', function () {
+                    infowindow.open(map, marker);
+                });
+
+                kakao.maps.event.addListener(marker, 'mouseout', function () {
+                    infowindow.close();
+                });
+
+                bounds.extend(placePosition);
+
+                var li = document.createElement('li');
+                li.classList.add('place-item');
+
+                li.innerHTML = '<strong> [' + place.title + '] - ' + place.place + ' </strong> <br>' + ' ' + place.address + place.place;
+                li.onclick = function () {
+                    isUserFavorite(place);
+                    showPlaceDetail(place);
+                    map.setCenter(placePosition);
+                };
+                listEl.appendChild(li);
             });
-            marker.setMap(map);
 
-            // 인포윈도우 생성
-            var infowindow = new kakao.maps.InfoWindow({
-                content: '<div style="padding:5px;">' + place.place + '</div>'
-            });
-
-            kakao.maps.event.addListener(marker, 'mouseover', function() {
-                infowindow.open(map, marker);
-            });
-
-            kakao.maps.event.addListener(marker, 'mouseout', function() {
-                infowindow.close();
-            });
-
-            bounds.extend(placePosition);
-
-            var li = document.createElement('li');
-            li.classList.add('place-item');
-
-            li.innerHTML = '<strong> [' + place.title + '] - ' + place.place + ' </strong> <br>' + ' ' + place.address + place.place;
-            li.onclick = function() {
-                showPlaceDetail(place);
-                map.setCenter(placePosition);
-            };
-            listEl.appendChild(li);
+            map.setBounds(bounds);
+            document.getElementById('prevButton').style.display = currentPage > 0 ? 'block' : 'none';
+            document.getElementById('nextButton').style.display = sortedPlaces.length > (currentPage + 1) * resultsPerPage ? 'block' : 'none';
+        }, function (error) {
+            console.log('Geolocation failed: ' + error.message);
         });
-
-        map.setBounds(bounds);
-        document.getElementById('prevButton').style.display = currentPage > 0 ? 'block' : 'none';
-        document.getElementById('nextButton').style.display = sortedPlaces.length > (currentPage + 1) * resultsPerPage ? 'block' : 'none';
-    }, function(error) {
-        console.log('Geolocation failed: ' + error.message);
-    });
-}
-
-function showPlaceDetail(place) {
-
-    console.log('place 정보는 *****' + place);
-    document.getElementById('placeDetails').style.display = 'block';
-    document.getElementById('placeTitle').innerHTML = '<strong>' +  place.title +'</strong>';
-    document.getElementById('placeAddress').textContent = '[Address]: ' + place.address;
-    document.getElementById('placeDescription').textContent = '[Description]: ' + (place.placeDescribe || 'No Description :(');
-    document.getElementById('placeBusinessHours').textContent = '[Business Hours]: ' + (place.businessHour || 'No Information :(');
-    document.getElementById('placeClosedDay').textContent = '[Closed Days]: ' + (place.closedDay || 'No Information :(');
-    document.getElementById('placeNumber').textContent = '[Number]: ' + (place.phoneNumber || 'No Information :(');
-
-<!--     const userId = localStorage.getItem('userId');-->
-
-    axios.post('/api/places/search/log', {
-<!--        userId: userId,-->
-        placeId: place.filmId
-    })
-    .then(function(response) {
-        console.log('Log saved successfully');
-    })
-    .catch(function(error) {
-        console.error('Error saving log:', error);
-    });
-
-}
-
-function closeDetails() {
-    document.getElementById('placeDetails').style.display = 'none';
-}
-
-function loadPreviousResults() {
-    if (currentPage > 0) {
-        currentPage--;
-        displaySearchResults(searchResults);
     }
-}
 
-function loadNextResults() {
-    if ((currentPage + 1) * resultsPerPage < searchResults.length) {
-        currentPage++;
-        displaySearchResults(searchResults);
+    function showPlaceDetail(place) {
+
+        console.log('place 정보는 *****' + place);
+        document.getElementById('placeDetails').style.display = 'block';
+        document.getElementById('placeTitle').innerHTML = '<strong>' + place.title + '</strong>';
+        document.getElementById('placeAddress').textContent = '[Address]: ' + place.address;
+        document.getElementById('placeDescription').textContent = '[Description]: ' + (place.placeDescribe || 'No Description :(');
+        document.getElementById('placeBusinessHours').textContent = '[Business Hours]: ' + (place.businessHour || 'No Information :(');
+        document.getElementById('placeClosedDay').textContent = '[Closed Days]: ' + (place.closedDay || 'No Information :(');
+        document.getElementById('placeNumber').textContent = '[Number]: ' + (place.phoneNumber || 'No Information :(');
+
+        document.querySelector('.favorite-btn').setAttribute('onclick', `updateFavoriteStatus(${place.filmId})`);
+
+        <!--     const userId = localStorage.getItem('userId');-->
+
+        axios.post('/api/places/search/log', {
+            <!--        userId: userId,-->
+            placeId: place.filmId
+        })
+            .then(function (response) {
+                console.log('Log saved successfully');
+            })
+            .catch(function (error) {
+                console.error('Error saving log:', error);
+            });
+
     }
-}
 
-function setMyLocation() {
-    if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
+    function closeDetails() {
+        document.getElementById('placeDetails').style.display = 'none';
+    }
+
+    function loadPreviousResults() {
+        if (currentPage > 0) {
+            currentPage--;
+            displaySearchResults(searchResults);
+        }
+    }
+
+    function loadNextResults() {
+        if ((currentPage + 1) * resultsPerPage < searchResults.length) {
+            currentPage++;
+            displaySearchResults(searchResults);
+        }
+    }
+
+    function setMyLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
                 var lat = position.coords.latitude;
                 var lon = position.coords.longitude;
                 var locPosition = new kakao.maps.LatLng(lat, lon);
@@ -353,7 +358,7 @@ function setMyLocation() {
                 marker.setMap(map);
 
                 window.currentMarker = marker;
-            }, function(error) {
+            }, function (error) {
                 console.log('Geolocation failed: ' + error.message);
             }, {
                 enableHighAccuracy: true,
@@ -362,7 +367,7 @@ function setMyLocation() {
             });
         } else {
             console.log('Geolocation is not supported by this browser.');
-    }
+        }
     }
 
     function removeMarker() {
@@ -374,27 +379,114 @@ function setMyLocation() {
     function findMyLocation() {
         setMyLocation();
     }
-function handleSearch(event) {
-    event.preventDefault();
 
-    var form = document.getElementById('searchForm');
-    var formData = new FormData(form);
+    function handleSearch(event) {
+        event.preventDefault();
 
-    var queryString = new URLSearchParams(formData).toString();
-    var requestUrl = '/api/places/search?' + queryString;
-    console.log('request Url 은 ***** ' + requestUrl);
+        var form = document.getElementById('searchForm');
+        var formData = new FormData(form);
 
-    axios.get(requestUrl)
-        .then(function(response) {
-            var data = response.data;
-            currentPage = 0; // 페이지 초기화
-            searchResults = data; // 검색 결과 저장
-            displaySearchResults(data);
+        var queryString = new URLSearchParams(formData).toString();
+        var requestUrl = '/api/places/search?' + queryString;
+        console.log('request Url 은 ***** ' + requestUrl);
+
+        axios.get(requestUrl)
+            .then(function (response) {
+                var data = response.data;
+                currentPage = 0; // 페이지 초기화
+                searchResults = data; // 검색 결과 저장
+                displaySearchResults(data);
+            })
+            .catch(function (error) {
+                console.error('Error:', error);
+            });
+    }
+
+    function isUserFavorite(place) {
+        const placeId = place.filmId;
+        const requestUrl = `http://localhost:80/api/favorites/check/${userId}/${placeId}`;
+
+        axios.get(requestUrl)
+            .then(response => {
+                const result = response.data;
+                if (!result) {
+                    // 즐겨찾기 안 한 장소일 경우
+                    const favoriteIcon = document.getElementById('favoriteIcon');
+                    favoriteIcon.src = "/images/icons/heart.svg";
+                } else {
+                    // 즐겨찾기 한 장소일 경우
+                    const favoriteIcon = document.getElementById('favoriteIcon');
+                    favoriteIcon.src = "/images/icons/heart-filled.svg";
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+
+    function updateFavoriteStatus(placeId) {
+        const requestUrl = `http://localhost:80/api/favorites/${userId}/places/${placeId}`;
+        const favoriteIcon = document.getElementById('favoriteIcon');
+
+        if (favoriteIcon.src.includes("/images/icons/heart-filled.svg")) {
+            axios.delete(requestUrl)
+                .then(response => {
+                    const result = response.data;
+
+                    if (result) {
+                        alert("즐겨찾기가 해지되었습니다.");
+                        const favoriteIcon = document.getElementById('favoriteIcon');
+                        favoriteIcon.src = "/images/icons/heart.svg";
+                    } else {
+                        alert("즐겨찾기 해지에 실패했습니다.");
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        } else {
+            axios.get(requestUrl)
+                .then(response => {
+                    const result = response.data;
+
+                    if (result) {
+                        alert("즐겨찾기에 추가되었습니다.");
+                        const favoriteIcon = document.getElementById('favoriteIcon');
+                        favoriteIcon.src = "/images/icons/heart-filled.svg";
+                    } else {
+                        alert("즐겨찾기에 추가되지 않았습니다.");
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+    }
+
+    let userId = null;
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const token = localStorage.getItem('authToken');
+        if (!token) {
+            console.error('No token found');
+            return;
+        }
+        console.log("********" + token);
+        axios.get('/user/info', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
         })
-        .catch(function(error) {
-            console.error('Error:', error);
-        });
-}
+            .then(response => {
+                const user = response.data;
+                userId = user.userId;
+
+                fetchFavorites(userId);
+            })
+            .catch(error => {
+                console.error('Error loading user info:', error);
+            });
+    });
 </script>
 </body>
 </html>
