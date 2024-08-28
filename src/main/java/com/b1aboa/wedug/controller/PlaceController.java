@@ -104,10 +104,10 @@ public class PlaceController {
         }
     }
 
-    @PostMapping("/search/log")
-    public ResponseEntity<String> logPlaceSearch(@RequestBody PlaceSearchLogDTO logDTO) {
-        logger.info("Place search log - User ID: {}, Place ID: {}", logDTO.getUserId(), logDTO.getPlaceId());
-        return ResponseEntity.ok("Log recorded successfully");
-    }
+//    @PostMapping("/search/log")
+//    public ResponseEntity<String> logPlaceSearch(@RequestBody PlaceSearchLogDTO logDTO) {
+//        logger.info("Place search log - User ID: {}, Place ID: {}", logDTO.getUserId(), logDTO.getPlaceId());
+//        return ResponseEntity.ok("Log recorded successfully");
+//    }
 
 }
