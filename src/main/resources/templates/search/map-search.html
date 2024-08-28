@@ -298,7 +298,6 @@
 
     function showPlaceDetail(place) {
 
-        console.log('place 정보는 *****' + place);
         document.getElementById('placeDetails').style.display = 'block';
         document.getElementById('placeTitle').innerHTML = '<strong>' + place.title + '</strong>';
         document.getElementById('placeAddress').textContent = '[Address]: ' + place.address;
@@ -393,7 +392,11 @@
         var requestUrl = '/api/places/search?' + queryString;
         console.log('request Url 은 ***** ' + requestUrl);
 
-        axios.get(requestUrl)
+        axios.get(requestUrl,{
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+            )
             .then(function (response) {
                 var data = response.data;
                 currentPage = 0; // 페이지 초기화

@@ -2,14 +2,21 @@ package com.b1aboa.wedug.controller;
 
 import com.b1aboa.wedug.dto.PlaceDTO;
 import com.b1aboa.wedug.dto.PlaceSearchLogDTO;
+import com.b1aboa.wedug.dto.UserDTO;
 import com.b1aboa.wedug.service.PlaceService;
+import com.b1aboa.wedug.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.util.Collections;
 import java.util.List;
@@ -17,6 +24,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/api/places")
 public class PlaceController {
+    @Autowired
+    private UserService userService;
     private static final Logger logger = LoggerFactory.getLogger(PlaceController.class);
 
     private final PlaceService searchService;
@@ -26,7 +35,7 @@ public class PlaceController {
         this.searchService = mapService;
     }
 
-//  /api/places/search?media-code={mediaType}
+    //  /api/places/search?media-code={mediaType}
 //  /api/places/search?place={placeCode}
 //  /api/places/search?media-type={mediaType}&place={placeCode}
 //  /api/places/search?keyword={placeName}
@@ -34,8 +43,32 @@ public class PlaceController {
     @ResponseBody
     public ResponseEntity<?> searchPlaceMedia(@RequestParam(value = "media-code", required = false) Long mediaCode,
                                               @RequestParam(value = "keyword", required = false) String keyword,
-                                              @RequestParam(value = "place", required = false) Long placeCode) {
+                                              @RequestParam(value = "place", required = false) Long placeCode,
+                                              Authentication authentication) {
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+
         logger.info("Received request with media-code: {}, keyword: {}, place: {}", mediaCode, keyword, placeCode);
+
+        // 인증된 사용자 정보 로깅
+        if (authentication != null) {
+            String userId = authentication.getName();
+            logger.info("Authenticated user ID: {}", userId);
+            UserDTO userDto = userService.getUserInfo(userId);
+
+            if (userDto != null) {
+                logger.info("User info - ID: {}, Nickname: {}, Gender: {}, Birth Year: {}, Nation Code: {}",
+                        userDto.getUserId(),
+                        userDto.getNickname(),
+                        userDto.getGender(),
+                        userDto.getBirthYear(),
+                        userDto.getNationCode());
+            } else {
+                logger.warn("User not found for ID: {}", userId);
+            }
+        } else {
+            logger.warn("No authentication information available");
+        }
+
 
         try {
             List<PlaceDTO> searchList;
