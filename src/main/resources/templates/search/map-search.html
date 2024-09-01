@@ -391,12 +391,13 @@
         var queryString = new URLSearchParams(formData).toString();
         var requestUrl = '/api/places/search?' + queryString;
         console.log('request Url 은 ***** ' + requestUrl);
+        const token = localStorage.getItem('authToken');
 
-        axios.get(requestUrl,{
+        axios.get(requestUrl, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
-            )
+        })
             .then(function (response) {
                 var data = response.data;
                 currentPage = 0; // 페이지 초기화
