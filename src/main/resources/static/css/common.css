@@ -189,56 +189,54 @@ input:focus {
 }
 
 /* 메인 콘텐츠 스타일*/
-.top-template {
-    width: 100%;
+.title-info {
+    align-self: flex-start;      /* .title-info를 왼쪽 끝으로 정렬 */
+    margin-bottom: 20px;         /* .first-info와의 간격 조정 */
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #424242;
+}
+
+.service-info {
+    border-radius: 15px;
+    display: flex;              /* 자식 요소들을 가운데 정렬하기 위해 flexbox 사용 */
+    flex-direction: column;     /* 수직 방향으로 배치 */
+    justify-content: center;    /* 자식 요소를 수평 중앙 정렬 */
+    align-items: center;        /* 자식 요소를 수직 중앙 정렬 */
+    text-align: center;
+    padding: 20px;              /* 내부 여백 추가 */
+    box-sizing: border-box;     /* 패딩과 보더를 너비와 높이에 포함 */
+    position: relative;         /* 절대 위치를 위해 상대 위치 설정 */
+    margin: auto;
+    margin-bottom: 10px;
+}
+.first {
     background-color: #4CAF50;
-    color: white;
-    text-align: center;
-    padding: 50px 0;
+    color: #fff;
+}
+.second {
+    background-color: #CEDF9F;
+    color: #F5F5F5;
+}
+.text-container {
+    position: absolute;         /* 절대 위치 설정 */
+    top: 20px;                  /* 위쪽 여백 */
+    left: 20px;                 /* 왼쪽 여백 */
+    width: calc(100% - 40px);   /* 부모 너비에서 여백을 제외한 너비 */
+    text-align: left;           /* 왼쪽 정렬 */
+    font-size: 15pt;
 }
 
-.main-title {
-    font-size: 48px;
-    margin: 0;
+.image-container {
+    margin-top: 80px;           /* 이미지 위쪽 여백, 필요에 따라 조정 */
+    display: flex;              /* Flexbox 사용 */
+    justify-content: center;    /* 이미지 수평 중앙 정렬 */
+    width: 70%;                /* 부모의 너비를 100% 사용 */
 }
 
-.main-content {
-    max-width: 800px;
-    width: 100%;
-    margin-top: 20px;
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.service-intro {
-    text-align: center;
-}
-
-.service-intro h2 {
-    font-size: 36px;
-    color: #333;
-    margin-bottom: 20px;
-}
-
-.service-list {
-    list-style-type: none;
-    padding: 0;
-}
-
-.service-list li {
-    margin-bottom: 20px;
-}
-
-.service-list h3 {
-    font-size: 28px;
-    color: #4CAF50;
-}
-
-.service-list p {
-    font-size: 18px;
-    color: #666;
+.image-container img {
+    max-width: 100%;            /* 이미지의 최대 너비를 부모 너비에 맞춤 */
+    height: auto;               /* 높이는 자동으로 조정 */
 }
 
 /* 검색 페이지 스타일 */

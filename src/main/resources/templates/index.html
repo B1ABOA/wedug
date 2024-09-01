@@ -2,41 +2,37 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="include/head-meta-fragment :: head-mata"></th:block>
 <body>
-<script th:inline="javascript">
+    <script th:inline="javascript">
 
-</script>
-<th:block th:replace="include/header-fragment :: header"></th:block>
-<main class="main-block">
-    <!-- 상단 베너 -->
-    <div class="top-template">
-        <h1 class="main-title">wedug</h1>
-    </div>
-
-    <!-- 메인 콘텐츠: 서비스 소개 -->
-    <div class="main-content">
-        <section class="service-intro">
-            <h2>서비스 소개✈️</h2>
-            <p> WEDUG 은 당신의 여행을 더욱 특별하게 만들어줄 덕후들의 천국입니다.
-                TV 속 영화와 드라마의 촬영지, 연예인들이 다녀간 핫플레이스, 맛집, 명소 등을 한눈에 볼 수 있는 플랫폼입니다.
-                트래블카드로 여행하는 당신을 위해, 팬심을 자극하는 특별한 여행 경험을 제공합니다.</p>
-            <ul class="service-list" style="margin-top: 10px;">
-                <li>
-                    <h3>차별화된 여행 경험</h3>
-                    <p>영화, 드라마, 연예인과 연관된 특별한 장소를 소개하여 팬들에게 독특하고 의미 있는 여행 경험을 제공합니다</p>
-                </li>
-                <li>
-                    <h3>관광 산업 활성화</h3>
-                    <p>덕후 문화를 활용한 새로운 관광 트렌드를 창출하여 지역 경제 활성화에 기여합니다.</p>
-                </li>
-                <li>
-                    <h3>트래블카드 사용 증가</h3>
-                    <p>은행의 트래블카드와 연계하여 사용자들의 카드 사용을 유도하고, 은행의 수익 증대에 기여합니다.</p>
-                </li>
-            </ul>
-        </section>
-    </div>
-</main>
-<th:block th:replace="include/navbar-fragment :: navbar"></th:block>
-<th:block th:replace="include/footer-fragment :: footer"></th:block>
+    </script>
+    <th:block th:replace="include/header-fragment :: header"></th:block>
+    <main class="main-block">
+        <div class="title-info">
+            WeDug에 관한 <p>
+            모든 것
+        </div>
+        <div class="service-info first">
+            <div class="text-container">
+                <p>여행을 더욱 특별하게 <br> 만들어줄 덕후들의 천국</p>
+            </div>
+            <div class="image-container">
+                <img src="/images/icons/carrier.png" alt="Carrier Image">
+            </div>
+        </div>
+        <div class="service-info second">
+            <div class="text-container">
+                <p>TV 속 영화와 드라마의 촬영지<br>
+                    연예인들이 다녀간<br>
+                    핫플레이스, 맛집, 명소 등을<br>
+                    한눈에
+                </p>
+            </div>
+            <div class="image-container">
+                <img src="/images/icons/location.png" alt="Location Image">
+            </div>
+        </div>
+    </main>
+    <th:block th:replace="include/navbar-fragment :: navbar"></th:block>
+    <th:block th:replace="include/footer-fragment :: footer"></th:block>
 </body>
 </html>
