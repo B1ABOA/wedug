@@ -339,6 +339,42 @@ input:focus {
     height: 30px;
 }
 
+#placeAddress {
+    display: inline;
+}
+
+.copy-item {
+    display: inline-block;
+    margin-left: 5px; /* 약간의 간격 */
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.place-details .copy-item .copy-icon {
+    width: 100%;
+}
+
+.popup-container {
+    display: flex;            /* Flexbox 사용 */
+    align-items: center;      /* 수직 중앙 정렬 */
+    gap: 10px;                /* 요소 사이의 간격 설정 */
+}
+
+.address-container {
+    display: flex;            /* Flexbox 사용 */
+    align-items: center;      /* 수직 중앙 정렬 */
+    gap: 5px;                 /* 주소와 복사 아이콘 사이의 간격 설정 */
+}
+
+.popup-item {
+    width: 15px;
+    height: 15px;
+}
+
+.popup-item .popup-icon {
+    width: 100%;
+}
 /* 로그인 페이지 스타일 & 회원가입 페이지 스타일 */
 .login-container {
     max-width: 400px;

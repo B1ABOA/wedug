@@ -146,11 +146,46 @@
                 <img src="/images/icons/heart.svg" alt="Favorite" id="favoriteIcon">
             </button>
         </div>
-        <p id="placeAddress"></p>
-        <p id="placeDescription"></p>
-        <p id="placeBusinessHours"></p>
-        <p id="placeClosedDay"></p>
-        <p id="placeNumber"></p>
+        <!-- Description section -->
+        <div class="popup-container">
+            <div class="popup-item">
+                <img src="/images/icons/description.svg" alt="Description Icon" class="popup-icon">
+            </div>
+            <p id="placeDescription"></p>
+        </div>
+        <!-- Address section -->
+        <div class="popup-container">
+            <div class="popup-item">
+                <img src="/images/icons/location.svg" alt="Location Icon" class="popup-icon">
+            </div>
+            <div class="address-container">
+                <p id="placeAddress"></p>
+                <div class="copy-item" onclick="onClickCopyAddress()">
+                    <img src="/images/icons/copy.svg" alt="Copy Icon" class="copy-icon">
+                </div>
+            </div>
+        </div>
+        <!-- Business hours section -->
+        <div class="popup-container">
+            <div class="popup-item">
+                <img src="/images/icons/time.svg" alt="Time Icon" class="popup-icon">
+            </div>
+            <p id="placeBusinessHours"></p>
+        </div>
+        <!-- Closed day section -->
+        <div class="popup-container">
+            <div class="popup-item">
+                <img src="/images/icons/close.svg" alt="Close Icon" class="popup-icon">
+            </div>
+            <p id="placeClosedDay"></p>
+        </div>
+        <!-- Phone number section -->
+        <div class="popup-container">
+            <div class="popup-item">
+                <img src="/images/icons/phone.svg" alt="Phone Icon" class="popup-icon">
+            </div>
+            <p id="placeNumber"></p>
+        </div>
         <button class="close-btn" onclick="closeDetails()">닫기</button>
     </div>
 
@@ -300,11 +335,11 @@
 
         document.getElementById('placeDetails').style.display = 'block';
         document.getElementById('placeTitle').innerHTML = '<strong>' + place.title + '</strong>';
-        document.getElementById('placeAddress').textContent = '[Address]: ' + place.address;
-        document.getElementById('placeDescription').textContent = '[Description]: ' + (place.placeDescribe || 'No Description :(');
-        document.getElementById('placeBusinessHours').textContent = '[Business Hours]: ' + (place.businessHour || 'No Information :(');
-        document.getElementById('placeClosedDay').textContent = '[Closed Days]: ' + (place.closedDay || 'No Information :(');
-        document.getElementById('placeNumber').textContent = '[Number]: ' + (place.phoneNumber || 'No Information :(');
+        document.getElementById('placeAddress').textContent = place.address;
+        document.getElementById('placeDescription').textContent = (place.placeDescribe || 'No Description :(_');
+        document.getElementById('placeBusinessHours').textContent = (place.businessHour || 'No Information :()');
+        document.getElementById('placeClosedDay').textContent = (place.closedDay || 'No Information :()');
+        document.getElementById('placeNumber').textContent = (place.phoneNumber || 'No Information :()');
 
         const favoriteButton = document.querySelector('.favorite-btn');
         favoriteButton.onclick = function() {
@@ -495,6 +530,18 @@
                 console.error('Error loading user info:', error);
             });
     });
+
+    function onClickCopyAddress() {
+        let placeAddress = document.getElementById('placeAddress').textContent.trim();
+
+        navigator.clipboard.writeText(placeAddress)
+            .then(() => {
+                alert("주소가 복사되었습니다.");
+            })
+            .catch(err => {
+                console.error("주소 복사 실패:", err);
+            });
+    }
 </script>
 </body>
 </html>
