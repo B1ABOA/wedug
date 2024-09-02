@@ -5,7 +5,52 @@
         function onClickMoveHome() {
             window.location.href = '/';
         }
+
+        function onClickToggleSwitch() {
+            const toggleCheckbox = document.getElementById("toggle");
+            if (toggleCheckbox.checked) {
+                console.log("영어로 전환"); // 체크되어 있을 때
+            } else {
+                console.log("한글로 전환"); // 체크되어 있지 않을 때
+            }
+        }
+
+        function loadUserInfo() {
+            const token = localStorage.getItem('authToken');
+            if (!token) {
+                console.error('No token found');
+                return;
+            }
+            axios.get('/user/info', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+                .then(response => {
+                    const user = response.data;
+                    if (user.nickname) {
+                        document.querySelector('.user-name').innerText = `${user.nickname}님`;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading user info:', error);
+                });
+
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            loadUserInfo();
+        });
     </script>
     <div class="logo" onclick="onClickMoveHome()">WeDug</div>
+    <div class="right-section">
+        <div class="user-name"></div>
+        <div class="letter-item" >
+            <img src="/images/icons/english.svg" alt="Letter Icon" class="letter-icon">
+        </div>
+        <input type="checkbox" id="toggle" hidden onclick="onClickToggleSwitch()">
+        <label for="toggle" class="toggleSwitch">
+            <span class="toggleButton"></span>
+        </label>
+    </div>
 </header>
 </html>
